@@ -8,7 +8,7 @@ export default function NavBar() {
     <nav
       className={`${styles.navbar__bg_color} ${styles.navbar__text__color} flex justify-between flex-wrap items-center p-6 lg:px-36 lg:justify-normal`}
     >
-      <span className="font-bold lg:mr-12">PointVision</span>
+      <span className="text-2xl font-bold lg:mr-12">PointVision</span>
 
       {/* display on mobile size */}
       <div className="flex gap-x-3 lg:hidden">
@@ -56,16 +56,16 @@ export default function NavBar() {
         } w-full text-center lg:flex lg:items-center lg:w-auto`}
       >
         <div className="flex flex-col gap-y-3 mt-6 lg:flex-row lg:mt-0">
-          <a href="#" className="block lg:inline-block lg:mr-4">
+          <a href="#" className="text-xl block lg:inline-block lg:mr-4">
             Home
           </a>
-          <a href="#" className="block lg:inline-block lg:mr-4">
+          <a href="#" className="text-xl block lg:inline-block lg:mr-4">
             Product
           </a>
-          <a href="#" className="block lg:inline-block lg:mr-4">
+          <a href="#" className="text-xl block lg:inline-block lg:mr-4">
             Contact
           </a>
-          <a href="#" className="block lg:hidden">
+          <a href="#" className="text-xl block lg:hidden">
             Login / Register
           </a>
         </div>
