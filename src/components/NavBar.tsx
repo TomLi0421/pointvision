@@ -6,7 +6,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`${styles.navbar__bg_color} ${styles.navbar__text__color} flex justify-between flex-wrap items-center p-6 lg:px-36 lg:justify-normal`}
+      className={`${styles.navbar__bg_color} text-white flex justify-between flex-wrap items-center p-6 lg:px-36 lg:justify-normal`}
     >
       <span className="text-2xl font-bold lg:mr-12">PointVision</span>
 
