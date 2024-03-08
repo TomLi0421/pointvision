@@ -56,16 +56,16 @@ export default function NavBar() {
         } w-full text-center lg:flex lg:items-center lg:w-auto`}
       >
         <div className="flex flex-col gap-y-3 mt-6 lg:flex-row lg:mt-0">
-          <a href="#" className="block font-bold lg:inline-block lg:mr-4">
+          <a href="#" className="block lg:inline-block lg:mr-4">
             Home
           </a>
-          <a href="#" className="block font-bold lg:inline-block lg:mr-4">
+          <a href="#" className="block lg:inline-block lg:mr-4">
             Product
           </a>
-          <a href="#" className="block font-bold lg:inline-block lg:mr-4">
+          <a href="#" className="block lg:inline-block lg:mr-4">
             Contact
           </a>
-          <a href="#" className="block font-bold lg:hidden">
+          <a href="#" className="block lg:hidden">
             Login / Register
           </a>
         </div>
@@ -73,7 +73,7 @@ export default function NavBar() {
 
       {/* display on desktop size */}
       <div className="hidden lg:flex lg:gap-x-3 lg:ml-auto">
-        <a href="#" className="block font-bold lg:inline-block">
+        <a href="#" className="block lg:inline-block">
           Login / Register
         </a>
         <button className="block">
