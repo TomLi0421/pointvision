@@ -29,7 +29,10 @@ export default function NavBar() {
           </svg>
         </button>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="block">
+        <button
+          onClick={() => setIsOpen((prevOpen) => !prevOpen)}
+          className="block"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
