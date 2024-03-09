@@ -5,9 +5,9 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   return (
     <div
-      className={`${styles.hero__bg_color} text-white p-10 text-center lg:flex lg:items-center lg:justify-between lg:px-36 lg:py-20 lg:text-left`}
+      className={`${styles.hero__bg_color} text-white p-10 text-center flex flex-col xl:flex-row lg:items-center lg:justify-between lg:px-36 lg:py-20 lg:text-left`}
     >
-      <div className="lg:pr-64">
+      <div className="mb-10 xl:mr-64 lg:mb-0">
         <h1 className="font-bold text-3xl mb-10 lg:text-6xl lg:leading-tight">
           Enhancing Your Virtual Reality, One Accessory at a Time
         </h1>
@@ -18,7 +18,11 @@ export default function Hero() {
         <Button>Shop Now</Button>
       </div>
 
-      <img className="lg:w-auto mx-auto" src={playingVR} alt="playing VR" />
+      <img
+        className="w-full mx-auto lg:mx-0 xl:w-1/2"
+        src={playingVR}
+        alt="playing VR"
+      />
     </div>
   );
 }
