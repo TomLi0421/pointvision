@@ -5,7 +5,13 @@ import vrBattery from "./assets/vr-battery.png";
 import vrTreadmills from "./assets/vr-treadmills.png";
 import vrAudio from "./assets/vr-audio.png";
 
-export const accessoriesTypeData = [
+type AccessoryType = {
+  typeName: string;
+  img: string;
+  cardColor: string;
+};
+
+export const accessoriesTypeData: AccessoryType[] = [
   {
     typeName: "VR Controller",
     img: vrController,
