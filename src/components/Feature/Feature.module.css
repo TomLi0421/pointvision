@@ -1,0 +1,11 @@
+.feature__horizontal_line {
+  background-color: var(--dark-blue);
+}
+
+.feature__title__color {
+  color: var(--dark-blue);
+}
+
+.feature__description__color {
+  color: #737373;
+}

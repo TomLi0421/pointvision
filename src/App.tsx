@@ -1,7 +1,8 @@
 import "./App.css";
-import AccessoriesTypeList from "./components/AccessoriesTypeList";
-import Hero from "./components/Hero";
-import NavBar from "./components/NavBar";
+import AccessoriesTypeList from "./components/AccessoriesType/AccessoriesTypeList";
+import Feature from "./components/Feature/Feature";
+import Hero from "./components/Hero/Hero";
+import NavBar from "./components/Navbar/NavBar";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <NavBar />
       <Hero />
       <AccessoriesTypeList />
+      <Feature />
     </>
   );
 }

@@ -1,5 +1,5 @@
-import { accessoriesTypeData } from "../accessories_type_data";
-import AccessoriesCard from "./AccessoriesCard";
+import { accessoriesTypeData } from "../../accessories_type_data";
+import AccessoriesCard from "./AccessoriesTypeCard";
 
 export default function AccessoriesTypeList() {
   return (
