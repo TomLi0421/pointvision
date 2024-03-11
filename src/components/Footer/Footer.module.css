@@ -1,0 +1,19 @@
+.fotter__bg_color {
+  background-color: #ffffff;
+}
+
+.fotter__title_color {
+  color: var(--dark-blue);
+}
+
+.footer__subtitle_color {
+  color: #737373;
+}
+
+.footer__social_media_icon_color {
+  color: #23a6f0;
+}
+
+.footer__copy_right_bg_color {
+  background-color: #fafafa;
+}
