@@ -3,6 +3,7 @@ import AccessoriesTypeList from "./components/AccessoriesType/AccessoriesTypeLis
 import Feature from "./components/Feature/Feature";
 import Hero from "./components/Hero/Hero";
 import NavBar from "./components/Navbar/NavBar";
+import Subscription from "./components/Subscription/Subscription";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Hero />
       <AccessoriesTypeList />
       <Feature />
+      <Subscription />
     </>
   );
 }

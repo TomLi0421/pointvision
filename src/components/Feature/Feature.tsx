@@ -1,10 +1,9 @@
 import styles from "./Feature.module.css";
 import FeatureCard from "./FeatureCard";
 export default function Feature() {
-  // px-48
   return (
-    <div className="p-6 lg:max-w-[66rem] lg:mx-auto lg:lg:grid lg:grid-cols-3">
-      <div className="lg:mr-5 lg:max-w-96 lg:col-span-1">
+    <div className="p-6 sm:mb-0 lg:max-w-[66rem] lg:mx-auto lg:lg:grid lg:grid-cols-3">
+      <div className="lg:px-6 lg:mr-5 lg:max-w-96 lg:col-span-1">
         <div
           className={`${styles.feature__horizontal_line} h-1 w-24 mb-9`}
         ></div>
@@ -24,7 +23,8 @@ export default function Feature() {
 
       {/* the feature card component is used here */}
       {/* TODO: Change the title, icon and description for each card */}
-      <div className="lg:grid lg:grid-cols-2 lg:col-span-2">
+      {/* icon size should be w-14, h-14, text-white */}
+      <div className="lg:px-6 lg:grid lg:grid-cols-2 lg:col-span-2">
         <FeatureCard
           icon={
             <svg
