@@ -1,11 +1,11 @@
-#Client
+# Client
 
 1. `cd` to the `client` directory
 2. `npm i` install all the packages
 3. `npm run dev` to start the frontend
 4. Go to `http://localhost:5173/`
 
-#Server
+# Server
 
 1. `cd` to the `server` directory
 2. `npm i` install all the packages
