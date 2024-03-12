@@ -1,9 +1,9 @@
-import vrController from "./assets/vr-controller.png";
-import vrHeadsetUpgrade from "./assets/vr-headset-upgrade.png";
-import vrHapticDevices from "./assets/vr-haptic-devices.png";
-import vrBattery from "./assets/vr-battery.png";
-import vrTreadmills from "./assets/vr-treadmills.png";
-import vrAudio from "./assets/vr-audio.png";
+import vrController from "../assets/vr-controller.png";
+import vrHeadsetUpgrade from "../assets/vr-headset-upgrade.png";
+import vrHapticDevices from "../assets/vr-haptic-devices.png";
+import vrBattery from "../assets/vr-battery.png";
+import vrTreadmills from "../assets/vr-treadmills.png";
+import vrAudio from "../assets/vr-audio.png";
 
 type AccessoryType = {
   typeName: string;

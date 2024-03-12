@@ -2,7 +2,7 @@ import styles from "./Feature.module.css";
 import FeatureCard from "./FeatureCard";
 export default function Feature() {
   return (
-    <div className="p-6 sm:mb-0 lg:max-w-[66rem] lg:mx-auto lg:lg:grid lg:grid-cols-3">
+    <div className="py-6 sm:mb-0 lg:max-w-[66rem] lg:mx-auto lg:lg:grid lg:grid-cols-3">
       <div className="lg:px-6 lg:mr-5 lg:max-w-96 lg:col-span-1">
         <div
           className={`${styles.feature__horizontal_line} h-1 w-24 mb-9`}

@@ -1,11 +1,11 @@
-import subBackground from "../../assets/subscription_background.jpg";
-import Button from "../Button";
-import InputBox from "../InputBox";
+import subBackground from "../../../assets/subscription_background.jpg";
+import Button from "../../../components/ui/Button";
+import InputBox from "../../../components/ui/InputBox";
 import styles from "./Subscription.module.css";
 
 export default function Subscription() {
   return (
-    <div className="relative py-6 ">
+    <div className="relative py-6">
       <img
         className="object-cover w-full h-[414px]"
         src={subBackground}

@@ -1,5 +1,6 @@
-import playingVR from "../../assets/playing-vr.png";
-import Button from "../Button";
+import { Link } from "react-router-dom";
+import playingVR from "../../../assets/playing-vr.png";
+import Button from "../../../components/ui/Button";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -17,7 +18,7 @@ export default function Hero() {
         </h4>
 
         <Button className="bg-opacity-0 border border-solid border-white px-10 py-3.5 rounded hover:bg-white hover:text-black">
-          Shop Now
+          <Link to="/product">Shop Now</Link>
         </Button>
       </div>
 

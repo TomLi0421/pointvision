@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./FooterSubSection.module.css";
 
 export default function FooterSubSection(props: {
@@ -14,13 +15,13 @@ export default function FooterSubSection(props: {
       <div className="flex flex-col">
         {props.subTitles.map((subTitle, index) => {
           return (
-            <a
+            <Link
               key={index}
               className={`${styles.footer__subtitle_color} font-bold text-sm mb-2.5 hover:underline`}
-              href="#"
+              to={`/${subTitle}`}
             >
               {subTitle}
-            </a>
+            </Link>
           );
         })}
       </div>

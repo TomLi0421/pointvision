@@ -1,19 +1,20 @@
 import "./App.css";
-import AccessoriesTypeList from "./components/AccessoriesType/AccessoriesTypeList";
-import Feature from "./components/Feature/Feature";
 import Footer from "./components/Footer/Footer";
-import Hero from "./components/Hero/Hero";
 import NavBar from "./components/Navbar/NavBar";
-import Subscription from "./components/Subscription/Subscription";
+import HomePage from "./pages/Home";
+import NotFoundPage from "./pages/NotFound";
+import ProductPage from "./pages/Product";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
       <NavBar />
-      <Hero />
-      <AccessoriesTypeList />
-      <Feature />
-      <Subscription />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product" element={<ProductPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       <Footer />
     </>
   );
