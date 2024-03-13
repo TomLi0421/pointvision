@@ -1,4 +1,4 @@
-import AccessoriesTypeList from "../../components/AccessoriesType/AccessoriesTypeList";
+import AccessoriesTypeList from "./AccessoriesType/AccessoriesTypeList";
 import Feature from "./Feature/Feature";
 import Hero from "./Hero/Hero";
 import Subscription from "./Subscription/Subscription";

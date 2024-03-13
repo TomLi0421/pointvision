@@ -68,7 +68,7 @@ export default function NavBar() {
           <Link to="#" className="text-xl block lg:inline-block lg:mr-4">
             Contact
           </Link>
-          <Link to="#" className="text-xl block lg:hidden">
+          <Link to="/login" className="text-xl block lg:hidden">
             Login / Register
           </Link>
         </div>
@@ -76,7 +76,7 @@ export default function NavBar() {
 
       {/* display on desktop size */}
       <div className="hidden lg:flex lg:gap-x-3 lg:ml-auto">
-        <Link to="#" className="block lg:inline-block">
+        <Link to="/login" className="block lg:inline-block">
           Login / Register
         </Link>
         <Link to="#">
