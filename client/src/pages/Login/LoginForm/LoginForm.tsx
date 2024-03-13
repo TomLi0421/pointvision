@@ -10,6 +10,7 @@ function LoginForm() {
         id="email"
         labeltext="Email"
         type="email"
+        name="email"
         placeholder="Enter your email"
       />
       <InputBoxWithLabel
@@ -17,6 +18,7 @@ function LoginForm() {
         id="password"
         labeltext="Password"
         type="password"
+        name="password"
         placeholder="Enter your password"
       />
       <Button

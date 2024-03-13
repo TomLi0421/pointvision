@@ -5,10 +5,12 @@ function InputBoxWithLabel(props: any) {
         {props.labeltext}
       </label>
       <input
-        className="border-b-indigo-900 border-b-2 w-full outline-none py-3"
+        className="focus:border-b-indigo-900 border-b-2 w-full outline-none py-3"
         type={props.type}
         id={props.id}
+        name={props.name}
         placeholder={props.placeholder}
+        required
       />
     </div>
   );
