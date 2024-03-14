@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
+const { reset } = require("nodemon");
 
 // aws service only
 // const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
@@ -66,7 +67,8 @@ app.get("/api/get-all-product", async (req, res) => {
 
   Product.find()
     .then((result) => {
-      res.redirect("https://d2j3uzrexrokpc.cloudfront.net/" + result[0].img);
+      res.send(result);
+      // res.send("https://d2j3uzrexrokpc.cloudfront.net/" + result[0].imgName);
     })
     .catch((err) => {
       console.log(err);
