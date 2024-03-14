@@ -66,7 +66,7 @@ export default function NavBar() {
             Product
           </Link>
           <Link to="#" className="text-xl block lg:inline-block lg:mr-4">
-            Contact
+            About Us
           </Link>
           <Link to="/login" className="text-xl block lg:hidden">
             Login / Register
