@@ -6,8 +6,9 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   imgName: {
-    type: String,
+    type: [String],
     required: true,
+    validate: [arrayLimit, "{PATH} at least one image is required"],
   },
   description: {
     type: String,
@@ -15,11 +16,23 @@ const productSchema = new mongoose.Schema({
   compatible: {
     type: String,
   },
+  brand: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
   },
 });
+
+function arrayLimit(img) {
+  return img.length > 0;
+}
 
 const Product = mongoose.model("Product", productSchema);
 module.exports = Product;

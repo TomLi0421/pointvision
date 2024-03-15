@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
-const { reset } = require("nodemon");
 
 // aws service only
 // const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
@@ -51,8 +50,9 @@ app.get("/api/get-all-product", async (req, res) => {
   // mongoose query
   // const product = new Product({
   //   name: "Varjo 5m Cable",
-  //   imgName: "d3c8027e6ae8a22c0de7b2e5a879f274.jpg",
+  //   imgName: ["d3c8027e6ae8a22c0de7b2e5a879f274.jpg"],
   //   description: "5m cable for Varjo VR-1 and VR-2",
+  //   type: "Cables, Chargers and Batteries",
   //   specs: "any",
   //   price: 69.0,
   // });
