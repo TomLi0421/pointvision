@@ -16,10 +16,11 @@ export default function Hero() {
           Explore high-quality VR accessories for an unmatched virtual
           experience.
         </h4>
-
-        <Button className="bg-opacity-0 border border-solid border-white px-10 py-3.5 rounded hover:bg-white hover:text-black">
-          <Link to="/product">Shop Now</Link>
-        </Button>
+        <Link to="/product">
+          <Button className="bg-opacity-0 border border-solid border-white px-10 py-3.5 rounded hover:bg-white hover:text-black">
+            Shop Now
+          </Button>
+        </Link>
       </div>
 
       <img
