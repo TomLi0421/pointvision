@@ -28,6 +28,12 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  weight: {
+    type: String,
+  },
+  color: {
+    type: String,
+  },
 });
 
 function arrayLimit(img) {

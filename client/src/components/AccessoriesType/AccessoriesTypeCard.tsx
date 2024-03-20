@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export default function AccessoriesCard(props: any, key: number) {
   return (
     <div
-      key={key}
       className={`${props.cardColor} ${props.className} h-80 px-12 py-6 flex flex-col justify-between 2xl:items-center 2xl:flex-row`}
     >
       <div>
