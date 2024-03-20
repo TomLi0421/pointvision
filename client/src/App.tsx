@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFound";
 import ProductPage from "./pages/Product";
 import { Route, Routes } from "react-router-dom";
 import RegisterPage from "./pages/RegisterForm";
+import TypeOfProductPage from "./pages/TypeOfProduct";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/:type" element={<TypeOfProductPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFoundPage />} />

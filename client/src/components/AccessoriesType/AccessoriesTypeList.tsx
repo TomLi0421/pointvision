@@ -13,6 +13,7 @@ export default function AccessoriesTypeList(props: any) {
             typeName={accessory.typeName}
             img={accessory.img}
             cardColor={accessory.cardColor}
+            type={accessory.type}
           />
         ))}
       </div>
