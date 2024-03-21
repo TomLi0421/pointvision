@@ -3,8 +3,14 @@ import ProductCard from "./ProductCard/ProductCard";
 import { ProductContext } from "../../context/ProductContext";
 import styles from "./ProductCardList.module.css";
 
-function ProductCardList() {
-  const { products, isDataLoaded } = useContext(ProductContext);
+function ProductCardList(props: any) {
+  let { products, isDataLoaded } = useContext(ProductContext);
+
+  if (props.type) {
+    products = products.filter((product: any) => {
+      return product.type === props.type;
+    });
+  }
 
   return (
     <>

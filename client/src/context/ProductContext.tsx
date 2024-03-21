@@ -23,7 +23,6 @@ export default function ProductProvider({ children }: ProductProviderProps) {
     );
 
     setProducts(response.data);
-
     setIsDataLoaded(true);
   };
 
