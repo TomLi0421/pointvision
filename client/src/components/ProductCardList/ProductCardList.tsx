@@ -32,6 +32,7 @@ function ProductCardList(props: any) {
             return (
               <ProductCard
                 key={product._id}
+                id={product._id}
                 name={product.name}
                 type={product.type}
                 img={product.imgName[0]}

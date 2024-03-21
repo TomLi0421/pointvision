@@ -148,6 +148,24 @@ app.get("/api/get-all-product", async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send({ message: "Server error" });
+    });
+});
+
+app.get("/api/get-product/:productName", async (req, res) => {
+  const { productName } = req.params;
+
+  Product.findOne({ name: productName })
+    .then((result) => {
+      if (result) {
+        res.send(result);
+      } else {
+        res.status(404).send({ message: "Product not found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: "Server error" });
     });
 });
 

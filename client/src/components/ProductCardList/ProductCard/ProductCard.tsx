@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 
 function ProductCard(props: any, key: string) {
   return (
-    <Link to="/">
+    <Link
+      to={`/product/${props.type.toLowerCase()}/${props.name.replace(
+        /\s/g,
+        "_"
+      )}`}
+    >
       <div
         key={key}
         className="flex flex-col items-center border shadow-lg rounded p-6 max-h-[39rem]"
@@ -11,7 +16,7 @@ function ProductCard(props: any, key: string) {
         <img
           className="object-contain mb-6 h-[27rem]"
           src={`https://d2j3uzrexrokpc.cloudfront.net/${props.type}/${props.img}`}
-          alt={props.productName}
+          alt={props.name}
         />
         <h5 className="font-bold text-base mb-2.5 text-center">{props.name}</h5>
         <p
