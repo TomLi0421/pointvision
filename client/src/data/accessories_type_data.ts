@@ -41,7 +41,7 @@ export const accessoriesTypeData: AccessoryType[] = [
     typeName: "Treadmills and Fitness",
     img: vrTreadmills,
     cardColor: "bg-teal-900",
-    type: "TreadmillAndFitness",
+    type: "TreadmillsAndFitness",
   },
   {
     typeName: "Audio",

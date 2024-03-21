@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
+import Badge from "@mui/joy/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export default function NavBar() {
+export default function NavBar(props: any) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,26 +17,15 @@ export default function NavBar() {
 
       {/* display on mobile size */}
       <div className="flex gap-x-3 lg:hidden">
-        <button className="block">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-            />
-          </svg>
-        </button>
+        <Link to="#">
+          <Badge badgeContent={props.shoppingCartQty}>
+            <ShoppingCartIcon />
+          </Badge>
+        </Link>
 
         <button
           onClick={() => setIsOpen((prevOpen) => !prevOpen)}
-          className="block"
+          className="block ml-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -80,22 +71,9 @@ export default function NavBar() {
           Login / Register
         </Link>
         <Link to="#">
-          <button className="block">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-              />
-            </svg>
-          </button>
+          <Badge badgeContent={props.shoppingCartQty}>
+            <ShoppingCartIcon />
+          </Badge>
         </Link>
       </div>
     </nav>

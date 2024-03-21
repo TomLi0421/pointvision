@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductDescription from "../../components/ProductDesciption/ProductDescription";
 
-function ProductDetailPage() {
+function ProductDetailPage(props: any) {
   const { productName } = useParams<{ productName: string }>();
   const formattedProductName = productName!.replace(/_/g, " ");
 
@@ -52,6 +52,7 @@ function ProductDetailPage() {
             name={product.name}
             price={product.price}
             description={product.description}
+            handleUpdateShoppingCartQty={props.handleUpdateShoppingCartQty}
           />
         </main>
       </div>

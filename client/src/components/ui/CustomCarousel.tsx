@@ -8,7 +8,7 @@ function CustomCarousel(props: any) {
       {props.images.map((image: any, index: number) => (
         <Paper
           key={index}
-          className="min-h-72 flex items-center h-full"
+          className="min-h-72 flex items-center h-full lg:h-[28rem]"
           elevation={0}
         >
           <img
