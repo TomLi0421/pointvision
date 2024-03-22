@@ -17,7 +17,7 @@ export default function NavBar(props: any) {
 
       {/* display on mobile size */}
       <div className="flex gap-x-3 lg:hidden">
-        <Link to="#">
+        <Link to="/shopping_cart">
           <Badge badgeContent={props.shoppingCartQty}>
             <ShoppingCartIcon />
           </Badge>
@@ -70,7 +70,7 @@ export default function NavBar(props: any) {
         <Link to="/login" className="block lg:inline-block">
           Login / Register
         </Link>
-        <Link to="#">
+        <Link to="/shopping_cart">
           <Badge badgeContent={props.shoppingCartQty}>
             <ShoppingCartIcon />
           </Badge>
