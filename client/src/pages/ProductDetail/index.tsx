@@ -50,6 +50,8 @@ function ProductDetailPage(props: any) {
           )}
           <ProductDescription
             name={product.name}
+            type={product.type}
+            brand={product.brand}
             price={product.price}
             description={product.description}
             handleUpdateShoppingCartQty={props.handleUpdateShoppingCartQty}

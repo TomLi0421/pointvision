@@ -7,7 +7,13 @@ interface ShoppingCartProviderProps {
 export const ShoppingCartContext = createContext({
   shoppingCartQty: 0,
   shoppingCartProduct: [],
-  updateShoppingCart: () => {},
+  handleUpdateShoppingCart: (product: {
+    name: string;
+    brand: string;
+    type: string;
+    qty: number;
+    price: number;
+  }) => {},
 });
 
 export default function ShoppingCartProvider({
@@ -21,9 +27,15 @@ export default function ShoppingCartProvider({
     JSON.parse(localStorage.getItem("shoppingCartProduct") || "[]")
   );
 
-  const handleUpdateShoppingCart = () => {
+  const handleUpdateShoppingCart = (product: {
+    name: string;
+    brand: string;
+    type: string;
+    qty: number;
+    price: number;
+  }) => {
     updateShoppingCartQty();
-    updateShoppingCartProduct();
+    updateShoppingCartProduct(product);
   };
 
   const updateShoppingCartQty = () => {
@@ -33,18 +45,30 @@ export default function ShoppingCartProvider({
     });
   };
 
-  const updateShoppingCartProduct = () => {
-    const product = {
-      name: "Meta Quest 2 Left Controller",
-      qty: 5,
-      price: 69.99,
-    };
-    setShoppingCartProduct((prev: []) => {
-      localStorage.setItem(
-        "shoppingCartProduct",
-        JSON.stringify([...prev, product])
+  const updateShoppingCartProduct = (product: {
+    name: string;
+    brand: string;
+    type: string;
+    qty: number;
+    price: number;
+  }) => {
+    setShoppingCartProduct((prev: any[]) => {
+      const existingProductIndex = prev.findIndex(
+        (p) => p.name === product.name
       );
-      return [...prev, product];
+
+      if (existingProductIndex !== -1) {
+        // The product already exists in the cart
+        const newCart = [...prev];
+        newCart[existingProductIndex].qty += product.qty;
+        localStorage.setItem("shoppingCartProduct", JSON.stringify(newCart));
+        return newCart;
+      } else {
+        // The product doesn't exist in the cart
+        const newCart = [...prev, product];
+        localStorage.setItem("shoppingCartProduct", JSON.stringify(newCart));
+        return newCart;
+      }
     });
   };
 
@@ -53,7 +77,7 @@ export default function ShoppingCartProvider({
       value={{
         shoppingCartQty: shoppingCartQty,
         shoppingCartProduct: shoppingCartProduct,
-        updateShoppingCart: handleUpdateShoppingCart,
+        handleUpdateShoppingCart: handleUpdateShoppingCart,
       }}
     >
       {children}

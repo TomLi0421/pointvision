@@ -4,7 +4,7 @@ import InputBox from "../InputBox";
 
 function QtyInput(props: any) {
   return (
-    <div {...props}>
+    <div className={props.className}>
       <Button
         className={`${styles.product_description_qty_btn} px-2.5 rounded mr-1`}
         onClick={props.handleDecreaseQty}

@@ -5,7 +5,7 @@ import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import QtyInput from "../ui/QtyInput/QtyInput";
 
 function ProductDescription(props: any) {
-  const { updateShoppingCart } = useContext(ShoppingCartContext);
+  const { handleUpdateShoppingCart } = useContext(ShoppingCartContext);
   const [quantity, setQuantity] = useState(1);
 
   const handleInputQty = (e: any) => {
@@ -53,7 +53,15 @@ function ProductDescription(props: any) {
       </div>
       <Button
         className={`${styles.product_description__btn_bg_color} text-white px-20 py-2.5 rounded mt-14`}
-        onClick={updateShoppingCart}
+        onClick={() =>
+          handleUpdateShoppingCart({
+            name: props.name,
+            brand: props.brand,
+            type: props.type,
+            price: props.price,
+            qty: quantity,
+          })
+        }
       >
         Buy
       </Button>
