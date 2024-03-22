@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, useEffect } from "react";
+import { ReactNode, createContext, useState } from "react";
 
 interface ShoppingCartProviderProps {
   children: ReactNode;
@@ -6,7 +6,8 @@ interface ShoppingCartProviderProps {
 
 export const ShoppingCartContext = createContext({
   shoppingCartQty: 0,
-  updateShoppingCartQty: () => {},
+  shoppingCartProduct: [],
+  updateShoppingCart: () => {},
 });
 
 export default function ShoppingCartProvider({
@@ -16,23 +17,43 @@ export default function ShoppingCartProvider({
     Number(localStorage.getItem("shoppingCartQty")) || 0
   );
 
-  const handleUpdateShoppingCartQty = () => {
+  const [shoppingCartProduct, setShoppingCartProduct] = useState(
+    JSON.parse(localStorage.getItem("shoppingCartProduct") || "[]")
+  );
+
+  const handleUpdateShoppingCart = () => {
+    updateShoppingCartQty();
+    updateShoppingCartProduct();
+  };
+
+  const updateShoppingCartQty = () => {
     setShoppingCartQty((prev) => {
       localStorage.setItem("shoppingCartQty", String(prev + 1));
       return prev + 1;
     });
   };
 
-  // save shopping cart quantity to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("shoppingCartQty", String(shoppingCartQty));
-  }, [shoppingCartQty]);
+  const updateShoppingCartProduct = () => {
+    const product = {
+      name: "Meta Quest 2 Left Controller",
+      qty: 5,
+      price: 69.99,
+    };
+    setShoppingCartProduct((prev: []) => {
+      localStorage.setItem(
+        "shoppingCartProduct",
+        JSON.stringify([...prev, product])
+      );
+      return [...prev, product];
+    });
+  };
 
   return (
     <ShoppingCartContext.Provider
       value={{
         shoppingCartQty: shoppingCartQty,
-        updateShoppingCartQty: handleUpdateShoppingCartQty,
+        shoppingCartProduct: shoppingCartProduct,
+        updateShoppingCart: handleUpdateShoppingCart,
       }}
     >
       {children}

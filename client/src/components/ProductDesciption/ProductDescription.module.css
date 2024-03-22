@@ -14,16 +14,6 @@
   color: #bdbdbd;
 }
 
-.product_description_qty_btn {
-  border: 1px solid #e8e8e8;
-}
-
 .product_description__btn_bg_color {
   background-color: #23a6f0;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }

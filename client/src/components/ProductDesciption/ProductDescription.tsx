@@ -1,14 +1,27 @@
 import { useContext, useState } from "react";
 import Button from "../ui/Button";
-import InputBox from "../ui/InputBox";
 import styles from "./ProductDescription.module.css";
-
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import QtyInput from "../ui/QtyInput/QtyInput";
 
 function ProductDescription(props: any) {
+  const { updateShoppingCart } = useContext(ShoppingCartContext);
   const [quantity, setQuantity] = useState(1);
 
-  const { updateShoppingCartQty } = useContext(ShoppingCartContext);
+  const handleInputQty = (e: any) => {
+    const newQuantity = Number(e.target.value);
+    if (newQuantity >= 1) {
+      setQuantity(newQuantity);
+    }
+  };
+
+  const handleIncreaseQty = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecreaseQty = () => {
+    if (quantity > 1) setQuantity((prev) => prev - 1);
+  };
 
   return (
     <div className="py-3 px-6">
@@ -31,37 +44,16 @@ function ProductDescription(props: any) {
         className={`${styles.product_description__line_color} border mt-4`}
       ></p>
       <div className="mt-4">
-        <Button
-          className={`${styles.product_description_qty_btn} px-2.5 rounded mr-1`}
-          onClick={() => {
-            if (quantity > 1) setQuantity((prev) => prev - 1);
-          }}
-        >
-          -
-        </Button>
-        <InputBox
-          type="number"
-          className="w-10 text-center"
-          placeholder="Quantity"
-          value={quantity}
-          onChange={(e: any) => {
-            const newQuantity = Number(e.target.value);
-            if (newQuantity >= 1) {
-              setQuantity(newQuantity);
-            }
-          }}
+        <QtyInput
+          quantity={quantity}
+          handleIncreaseQty={handleIncreaseQty}
+          handleDecreaseQty={handleDecreaseQty}
+          handleInputQty={handleInputQty}
         />
-        <Button
-          className={`${styles.product_description_qty_btn} px-2.5 rounded ml-1`}
-          onClick={() => setQuantity((prev) => prev + 1)}
-        >
-          +
-        </Button>
       </div>
       <Button
         className={`${styles.product_description__btn_bg_color} text-white px-20 py-2.5 rounded mt-14`}
-        // onClick={props.handleUpdateShoppingCartQty}
-        onClick={updateShoppingCartQty}
+        onClick={updateShoppingCart}
       >
         Buy
       </Button>

@@ -1,0 +1,9 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.product_description_qty_btn {
+  border: 1px solid #e8e8e8;
+}
