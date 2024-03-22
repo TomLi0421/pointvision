@@ -34,14 +34,14 @@ export default function ShoppingCartProvider({
     qty: number;
     price: number;
   }) => {
-    updateShoppingCartQty();
+    updateShoppingCartQty(product.qty);
     updateShoppingCartProduct(product);
   };
 
-  const updateShoppingCartQty = () => {
+  const updateShoppingCartQty = (qty: number) => {
     setShoppingCartQty((prev) => {
       localStorage.setItem("shoppingCartQty", String(prev + 1));
-      return prev + 1;
+      return prev + qty;
     });
   };
 
