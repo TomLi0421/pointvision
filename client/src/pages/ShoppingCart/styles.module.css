@@ -5,3 +5,7 @@
 .shopping_cart__text_color {
   color: #1e1e1e;
 }
+
+.shopping_cart__btn_bg_color {
+  background-color: var(--dark-blue);
+}

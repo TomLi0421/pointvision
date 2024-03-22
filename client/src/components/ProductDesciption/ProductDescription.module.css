@@ -15,5 +15,5 @@
 }
 
 .product_description__btn_bg_color {
-  background-color: #23a6f0;
+  background-color: var(--dark-blue);
 }
