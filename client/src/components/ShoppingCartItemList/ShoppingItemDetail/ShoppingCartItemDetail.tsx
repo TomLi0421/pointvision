@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import QtyInput from "../../ui/QtyInput/QtyInput";
 import styles from "./ShoppingCartItemDetail.module.css";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { ShoppingCartContext } from "../../../context/ShoppingCartContext";
 
 function ShoppingCartItemDetail(props: any) {
   const [quantity, setQuantity] = useState(props.qty);
   const [totalPrice, setTotalPrice] = useState(
     Number((props.price * quantity).toFixed(2))
   );
+
+  const { removeProduct } = useContext(ShoppingCartContext);
 
   const handleInputQty = (e: any) => {
     const newQuantity = Number(e.target.value);
@@ -39,6 +42,19 @@ function ShoppingCartItemDetail(props: any) {
     const calculatedTotalPrice = Number((props.price * qty).toFixed(2));
     setTotalPrice(calculatedTotalPrice);
   };
+
+  // const removeProduct = () => {
+  //   const allProduct = JSON.parse(
+  //     localStorage.getItem("shoppingCartProducts")!
+  //   );
+  //   const removedProduct = allProduct.filter(
+  //     (product: any) => product.name !== props.name
+  //   );
+  //   localStorage.setItem(
+  //     "shoppingCartProducts",
+  //     JSON.stringify(removedProduct)
+  //   );
+  // };
 
   return (
     <div className="ml-5 w-full flex justify-between h-full items-center">
@@ -72,7 +88,7 @@ function ShoppingCartItemDetail(props: any) {
 
       <div className="text-center md:flex ">
         <p className="mb-1 md:mr-1 md:mb-0">${totalPrice}</p>
-        <button>
+        <button onClick={() => removeProduct(props)}>
           <DeleteOutlineRoundedIcon />
         </button>
       </div>
