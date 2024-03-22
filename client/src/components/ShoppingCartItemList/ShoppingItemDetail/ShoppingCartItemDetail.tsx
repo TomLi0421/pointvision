@@ -49,7 +49,7 @@ function ShoppingCartItemDetail(props: any) {
           {props.brand}
         </h2>
         <p
-          className={`${styles.shopping_cart_item__brand_text_color} font-normal text-sm mt-1 md:max-w-28`}
+          className={`${styles.shopping_cart_item__brand_text_color} font-normal text-sm mt-1 md:w-28`}
         >
           {props.name}
         </p>
