@@ -12,6 +12,7 @@ function CustomCarousel(props: any) {
           elevation={0}
         >
           <img
+            className="object-contain h-full w-full"
             src={`https://d2j3uzrexrokpc.cloudfront.net/${props.type}/${image}`}
             alt={props.name}
           />
