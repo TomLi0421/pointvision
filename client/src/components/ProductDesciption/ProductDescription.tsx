@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../ui/Button";
 import InputBox from "../ui/InputBox";
 import styles from "./ProductDescription.module.css";
 
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+
 function ProductDescription(props: any) {
   const [quantity, setQuantity] = useState(1);
+
+  const { updateShoppingCartQty } = useContext(ShoppingCartContext);
 
   return (
     <div className="py-3 px-6">
@@ -56,7 +60,8 @@ function ProductDescription(props: any) {
       </div>
       <Button
         className={`${styles.product_description__btn_bg_color} text-white px-20 py-2.5 rounded mt-14`}
-        onClick={props.handleUpdateShoppingCartQty}
+        // onClick={props.handleUpdateShoppingCartQty}
+        onClick={updateShoppingCartQty}
       >
         Buy
       </Button>

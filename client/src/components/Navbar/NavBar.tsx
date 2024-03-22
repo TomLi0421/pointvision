@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import Badge from "@mui/joy/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
-export default function NavBar(props: any) {
+export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { shoppingCartQty } = useContext(ShoppingCartContext);
 
   return (
     <nav
@@ -18,7 +21,7 @@ export default function NavBar(props: any) {
       {/* display on mobile size */}
       <div className="flex gap-x-3 lg:hidden">
         <Link to="/shopping_cart">
-          <Badge badgeContent={props.shoppingCartQty}>
+          <Badge badgeContent={shoppingCartQty}>
             <ShoppingCartIcon />
           </Badge>
         </Link>
@@ -71,7 +74,7 @@ export default function NavBar(props: any) {
           Login / Register
         </Link>
         <Link to="/shopping_cart">
-          <Badge badgeContent={props.shoppingCartQty}>
+          <Badge badgeContent={shoppingCartQty}>
             <ShoppingCartIcon />
           </Badge>
         </Link>
