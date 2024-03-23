@@ -39,7 +39,9 @@ function ShoppingCartItemDetail(props: any) {
       return prev;
     });
 
-    storeProductQty(props.name, "subtract");
+    if (quantity > 1) {
+      storeProductQty(props.name, "subtract");
+    }
   };
 
   const calculateTotalPrice = (qty: number) => {
