@@ -14,17 +14,14 @@ function ShoppingCartPage() {
 
   const handleCheckout = async () => {
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-
     const response = await axios.post(
       "http://localhost:3000/api/create-checkout-session",
       {
         products: shoppingCartProduct,
       }
     );
-
     if (response.status === 200) {
       const session = await response.data;
-
       const result = await stripe!.redirectToCheckout({
         sessionId: session.id,
       });

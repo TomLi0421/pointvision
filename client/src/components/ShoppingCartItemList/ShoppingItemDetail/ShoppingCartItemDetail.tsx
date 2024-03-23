@@ -79,7 +79,7 @@ function ShoppingCartItemDetail(props: any) {
         handleInputQty={handleInputQty}
       />
 
-      <div className="text-center md:flex ">
+      <div className="text-center md:flex">
         <p className="mb-1 md:mr-1 md:mb-0">${totalPrice}</p>
         <button onClick={() => removeProduct(props)}>
           <DeleteOutlineRoundedIcon />

@@ -5,6 +5,7 @@ import { accessoriesTypeData } from "../../data/accessories_type_data";
 import ProductCardList from "../../components/ProductCardList/ProductCardList";
 import AccessoriesCard from "../../components/AccessoriesType/AccessoriesTypeCard";
 import ProductProvider from "../../context/ProductContext";
+import CustomPagination from "../../components/ui/CustomPagination";
 
 function ProductPage() {
   return (
@@ -49,6 +50,7 @@ function ProductPage() {
       </div>
       <main className="p-6 lg:px-36 flex flex-col items-center">
         <ProductCardList />
+        {/* <CustomPagination /> */}
       </main>
     </ProductProvider>
   );

@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import styles from "./ProductDescription.module.css";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import QtyInput from "../ui/QtyInput/QtyInput";
+import { ToastContainer } from "react-toastify";
 
 function ProductDescription(props: any) {
   const { handleUpdateShoppingCart } = useContext(ShoppingCartContext);
@@ -66,6 +67,7 @@ function ProductDescription(props: any) {
       >
         Add to cart
       </Button>
+      <ToastContainer />
     </div>
   );
 }

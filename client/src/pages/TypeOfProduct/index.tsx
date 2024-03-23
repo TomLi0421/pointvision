@@ -26,6 +26,7 @@ function TypeOfProductPage() {
       </div>
       <main className="p-6 lg:px-36 flex flex-col items-center">
         <ProductCardList type={type} />
+        {/* <CustomPagination /> */}
       </main>
     </ProductProvider>
   );

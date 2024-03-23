@@ -2,14 +2,21 @@ import { useContext } from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import { ProductContext } from "../../context/ProductContext";
 import styles from "./ProductCardList.module.css";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 function ProductCardList(props: any) {
-  let { products, isDataLoaded } = useContext(ProductContext);
+  let { products, isDataLoaded, currentPage, handleChange } =
+    useContext(ProductContext);
+
+  const productPerPage = 3;
+  let maxPage = Math.ceil(products.length / productPerPage);
 
   if (props.type) {
     products = products.filter((product: any) => {
       return product.type === props.type;
     });
+    maxPage = Math.ceil(products.length / productPerPage);
   }
 
   return (
@@ -45,6 +52,13 @@ function ProductCardList(props: any) {
           <p>Loading ...</p>
         )}
       </div>
+      {/* <Stack spacing={2} className="mt-6">
+        <Pagination
+          count={maxPage}
+          onChange={handleChange}
+          page={currentPage}
+        />
+      </Stack> */}
     </>
   );
 }

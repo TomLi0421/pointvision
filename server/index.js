@@ -133,7 +133,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
               name: product.name,
               images: product.imgName.map(
                 (imgName) =>
-                  `https://d2j3uzrexrokpc.cloudfront.net/${product.type}/${product.imgName[0]}`
+                  `https://d2j3uzrexrokpc.cloudfront.net/${product.type}/${imgName}`
               ),
             },
             unit_amount: Math.round(product.price * 100),
