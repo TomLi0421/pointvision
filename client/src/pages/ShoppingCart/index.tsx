@@ -5,27 +5,26 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import ShoppingCartItemList from "../../components/ShoppingCartItemList/ShoppingCartItemList";
 import Button from "../../components/ui/Button";
-import axios from "axios";
-// import { loadStripe } from "@stripe/stripe-js";
+import { ToastContainer, toast } from "react-toastify";
 
 function ShoppingCartPage() {
   const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
     useContext(ShoppingCartContext);
 
-  const handleCheckout = async () => {
-    // const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-    // const response = await axios.post(
-    //   "http://localhost:3000/api/create-checkout-session",
-    //   {
-    //     products: shoppingCartProduct,
-    //   }
-    // );
-    // if (response.status === 200) {
-    //   const session = await response.data;
-    //   const result = await stripe!.redirectToCheckout({
-    //     sessionId: session.id,
-    //   });
-    // }
+  const handleCheckout = (e: any) => {
+    if (shoppingCartProduct.length === 0) {
+      toast.error("Your shopping is empty", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      e.preventDefault();
+    }
   };
 
   useEffect(() => {
@@ -55,12 +54,15 @@ function ShoppingCartPage() {
         <h5 className="text-lg font-normal">Total</h5>
         <p className="text-lg font-bold">${totalPrice}</p>
       </div>
-      <Button
-        className={`${styles.shopping_cart__btn_bg_color} text-white px-20 py-2.5 rounded mt-8 w-full`}
-        onClick={handleCheckout}
-      >
-        Checkout
-      </Button>
+      <Link to="/shopping_cart/shipping">
+        <Button
+          className={`${styles.shopping_cart__btn_bg_color} text-white px-20 py-2.5 rounded mt-8 w-full`}
+          onClick={handleCheckout}
+        >
+          Continue to shipping
+        </Button>
+      </Link>
+      <ToastContainer />
     </div>
   );
 }

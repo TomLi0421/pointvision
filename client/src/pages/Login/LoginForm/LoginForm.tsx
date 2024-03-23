@@ -4,7 +4,7 @@ import styles from "./LoginForm.module.css";
 
 function LoginForm() {
   return (
-    <form action="#" className="">
+    <form action="#">
       <InputBoxWithLabel
         className="mb-12"
         id="email"

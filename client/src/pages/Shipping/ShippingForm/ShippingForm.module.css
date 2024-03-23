@@ -1,0 +1,12 @@
+.checkout_form__btn_bg_color {
+  background-color: var(--dark-blue);
+}
+
+.checkout_form__selector__bg_color {
+  background-color: #dddddd;
+  border-color: #dddddd;
+}
+
+.checkout_form__selector_text_color {
+  color: #737373;
+}
