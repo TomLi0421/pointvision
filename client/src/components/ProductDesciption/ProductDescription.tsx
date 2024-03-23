@@ -63,7 +63,7 @@ function ProductDescription(props: any) {
           })
         }
       >
-        Buy
+        Add to cart
       </Button>
     </div>
   );

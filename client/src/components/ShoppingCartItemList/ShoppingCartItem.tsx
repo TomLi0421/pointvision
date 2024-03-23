@@ -8,7 +8,8 @@ function ShoppingCartItem(props: any) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+    console.log("useEffect");
+  }, [props.productName]);
 
   const getProduct = async () => {
     const response = await axios.get(
@@ -24,7 +25,7 @@ function ShoppingCartItem(props: any) {
       {isDataLoaded && (
         <img
           className="object-contain w-[4.75rem] h-[4.75rem] rounded lg:w-20 lg:h-20"
-          src={`https://d2j3uzrexrokpc.cloudfront.net/${product.type}/${product.imgName}`}
+          src={`https://d2j3uzrexrokpc.cloudfront.net/${product.type}/${product.imgName[0]}`}
           alt={product.name}
         />
       )}

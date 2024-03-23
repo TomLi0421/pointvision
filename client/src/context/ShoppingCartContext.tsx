@@ -28,6 +28,7 @@ export default function ShoppingCartProvider({
     JSON.parse(localStorage.getItem("shoppingCartProducts") || "[]")
   );
 
+  // on product detail page, when user clicks on "Add to cart" button
   const handleUpdateShoppingCart = (product: {
     name: string;
     brand: string;
@@ -39,6 +40,7 @@ export default function ShoppingCartProvider({
     updateShoppingCartProduct(product);
   };
 
+  // on product detail page, when select 5 in the quantity of the product, the shopping cart quantity should be updated to 5
   const updateShoppingCartQty = (qty: number) => {
     setShoppingCartQty((prev) => {
       localStorage.setItem("shoppingCartQty", String(prev + qty));
@@ -46,6 +48,7 @@ export default function ShoppingCartProvider({
     });
   };
 
+  // on product detail page, store the product on local storage
   const updateShoppingCartProduct = (product: {
     name: string;
     brand: string;
@@ -73,11 +76,12 @@ export default function ShoppingCartProvider({
     });
   };
 
+  // on shopping cart page, when user clicks on "Remove" icon
   const removeProduct = (product: { name: string; qty: number }) => {
-    const allProduct = JSON.parse(
+    const allProducts = JSON.parse(
       localStorage.getItem("shoppingCartProducts")!
     );
-    const removedProduct = allProduct.filter(
+    const removedProduct = allProducts.filter(
       (p: any) => p.name !== product.name
     );
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
@@ -25,6 +26,7 @@ require("dotenv").config();
 
 // express app
 const app = express();
+app.use(express.json());
 
 // connect to mongodb
 const dbURI = process.env.DATABASE_URL;
@@ -93,8 +95,8 @@ app.get("/api/get-all-product", async (req, res) => {
     .then((result) => {
       res.send(result);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e);
       res.status(500).send({ message: "Server error" });
     });
 });
@@ -110,10 +112,36 @@ app.get("/api/get-product/:productName", async (req, res) => {
         res.status(404).send({ message: "Product not found" });
       }
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e);
       res.status(500).send({ message: "Server error" });
     });
+});
+
+app.post("/api/create-checkout-session", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: req.body.items.map((item) => {
+        return {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.name,
+            },
+            unit_amount: item.price * 100,
+          },
+          quantity: item.qty,
+        };
+      }),
+      mode: "payment",
+      success_url: "http://localhost:5173/success",
+      cancel_url: "http://localhost:5173/cancel",
+    });
+    res.json({ url: session.url });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // AWS S3 query

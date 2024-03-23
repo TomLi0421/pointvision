@@ -4,6 +4,7 @@ import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 
 function ShoppingCartItemList() {
   const { shoppingCartProduct } = useContext(ShoppingCartContext);
+
   return (
     <div className="mt-7">
       {shoppingCartProduct.map((product: any, index: number) => {

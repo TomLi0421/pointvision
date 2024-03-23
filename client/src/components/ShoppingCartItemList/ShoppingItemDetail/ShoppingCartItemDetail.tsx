@@ -43,19 +43,6 @@ function ShoppingCartItemDetail(props: any) {
     setTotalPrice(calculatedTotalPrice);
   };
 
-  // const removeProduct = () => {
-  //   const allProduct = JSON.parse(
-  //     localStorage.getItem("shoppingCartProducts")!
-  //   );
-  //   const removedProduct = allProduct.filter(
-  //     (product: any) => product.name !== props.name
-  //   );
-  //   localStorage.setItem(
-  //     "shoppingCartProducts",
-  //     JSON.stringify(removedProduct)
-  //   );
-  // };
-
   return (
     <div className="ml-5 w-full flex justify-between h-full items-center">
       <div>
