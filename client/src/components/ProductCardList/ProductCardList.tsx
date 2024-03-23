@@ -1,20 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import { ProductContext } from "../../context/ProductContext";
 import styles from "./ProductCardList.module.css";
 
 function ProductCardList(props: any) {
   let { products, isDataLoaded } = useContext(ProductContext);
-
-  const productPerPage = 3;
-  let maxPage = Math.ceil(products.length / productPerPage);
+  const [sortMethod, setSortMethod] = useState("low");
 
   if (props.type) {
     products = products.filter((product: any) => {
       return product.type === props.type;
     });
-    maxPage = Math.ceil(products.length / productPerPage);
   }
+
+  const sortedProducts = [...products].sort(
+    (a: { price: number }, b: { price: number }) => {
+      if (sortMethod === "low") {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    }
+  );
 
   return (
     <>
@@ -26,13 +33,15 @@ function ProductCardList(props: any) {
 
       <select
         className={`${styles.product_card_list__filter__bg_color} ${styles.product_card_list__filter_text_color} mb-24 border p-3 pl-5 border-r-[1.3rem] outline-none`}
+        value={sortMethod}
+        onChange={(e) => setSortMethod(e.target.value)}
       >
         <option value="low">Price: Low to High</option>
         <option value="high">Price: High to Low</option>
       </select>
       <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {isDataLoaded ? (
-          products.map((product: any) => {
+          sortedProducts.map((product: any) => {
             return (
               <ProductCard
                 key={product._id}

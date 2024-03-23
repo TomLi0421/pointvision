@@ -13,7 +13,7 @@ function ShoppingCartPage() {
 
   const handleCheckout = (e: any) => {
     if (shoppingCartProduct.length === 0) {
-      toast.error("Your shopping is empty", {
+      toast.error("Your shopping cart is empty", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
