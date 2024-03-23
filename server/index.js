@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const cors = require("cors");
@@ -7,8 +9,6 @@ const Product = require("./models/product");
 // aws service only
 // const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 // const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
-
-require("dotenv").config();
 
 // aws service only
 // const bucketName = process.env.BUCKET_NAME;
@@ -119,28 +119,34 @@ app.get("/api/get-product/:productName", async (req, res) => {
 });
 
 app.post("/api/create-checkout-session", async (req, res) => {
+  const { products } = req.body;
+
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: req.body.items.map((item) => {
+      mode: "payment",
+      line_items: products.map((product) => {
         return {
           price_data: {
             currency: "usd",
             product_data: {
-              name: item.name,
+              name: product.name,
+              images: product.imgName.map(
+                (imgName) =>
+                  `https://d2j3uzrexrokpc.cloudfront.net/${product.type}/${product.imgName[0]}`
+              ),
             },
-            unit_amount: item.price * 100,
+            unit_amount: Math.round(product.price * 100),
           },
-          quantity: item.qty,
+          quantity: product.qty,
         };
       }),
-      mode: "payment",
-      success_url: "http://localhost:5173/success",
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: `${process.env.CLIENT_URL}`,
     });
-    res.json({ url: session.url });
+
+    res.status(200).send({ id: session.id });
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(500).send({ error: e.message });
   }
 });
 

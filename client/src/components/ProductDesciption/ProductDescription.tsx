@@ -56,6 +56,7 @@ function ProductDescription(props: any) {
         onClick={() =>
           handleUpdateShoppingCart({
             name: props.name,
+            imgName: props.imgName,
             brand: props.brand,
             type: props.type,
             price: props.price,

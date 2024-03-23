@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
@@ -6,24 +6,30 @@ import styles from "./styles.module.css";
 import ShoppingCartItemList from "../../components/ShoppingCartItemList/ShoppingCartItemList";
 import Button from "../../components/ui/Button";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
 function ShoppingCartPage() {
   const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
     useContext(ShoppingCartContext);
 
-  // const handleCheckout = async () => {
-  //   const response = await axios.post(
-  //     "http://localhost:3000/api/create-checkout-session",
-  //     {
-  //       items: shoppingCartProduct,
-  //     },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // };
+  const handleCheckout = async () => {
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
+    const response = await axios.post(
+      "http://localhost:3000/api/create-checkout-session",
+      {
+        products: shoppingCartProduct,
+      }
+    );
+
+    if (response.status === 200) {
+      const session = await response.data;
+
+      const result = await stripe!.redirectToCheckout({
+        sessionId: session.id,
+      });
+    }
+  };
 
   useEffect(() => {
     calculateTotalPrice();
@@ -54,7 +60,7 @@ function ShoppingCartPage() {
       </div>
       <Button
         className={`${styles.shopping_cart__btn_bg_color} text-white px-20 py-2.5 rounded mt-8 w-full`}
-        // onClick={handleCheckout}
+        onClick={handleCheckout}
       >
         Checkout
       </Button>

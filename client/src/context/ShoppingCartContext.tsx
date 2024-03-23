@@ -9,6 +9,7 @@ export const ShoppingCartContext = createContext({
   shoppingCartProduct: [],
   handleUpdateShoppingCart: (product: {
     name: string;
+    imgName: string;
     brand: string;
     type: string;
     qty: number;
@@ -36,6 +37,7 @@ export default function ShoppingCartProvider({
   // on product detail page, when user clicks on "Add to cart" button
   const handleUpdateShoppingCart = (product: {
     name: string;
+    imgName: string;
     brand: string;
     type: string;
     qty: number;
@@ -56,6 +58,7 @@ export default function ShoppingCartProvider({
   // on product detail page, store the product on local storage
   const updateShoppingCartProduct = (product: {
     name: string;
+    imgName: string;
     brand: string;
     type: string;
     qty: number;
