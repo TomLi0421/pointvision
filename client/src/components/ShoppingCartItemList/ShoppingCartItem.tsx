@@ -8,7 +8,6 @@ function ShoppingCartItem(props: any) {
 
   useEffect(() => {
     getProduct();
-    console.log("useEffect");
   }, [props.productName]);
 
   const getProduct = async () => {

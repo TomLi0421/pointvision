@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import QtyInput from "../../ui/QtyInput/QtyInput";
 import styles from "./ShoppingCartItemDetail.module.css";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
@@ -10,7 +10,11 @@ function ShoppingCartItemDetail(props: any) {
     Number((props.price * quantity).toFixed(2))
   );
 
-  const { removeProduct } = useContext(ShoppingCartContext);
+  const { removeProduct, storeProductQty } = useContext(ShoppingCartContext);
+
+  useEffect(() => {
+    calculateTotalPrice(quantity);
+  }, [quantity]);
 
   const handleInputQty = (e: any) => {
     const newQuantity = Number(e.target.value);
@@ -21,21 +25,21 @@ function ShoppingCartItemDetail(props: any) {
 
   const handleIncreaseQty = () => {
     setQuantity((prev: number) => {
-      const newQuantity = prev + 1;
-      calculateTotalPrice(newQuantity);
-      return newQuantity;
+      return prev + 1;
     });
+
+    storeProductQty(props.name, "add");
   };
 
   const handleDecreaseQty = () => {
     setQuantity((prev: number) => {
       if (prev > 1) {
-        const newQuantity = prev - 1;
-        calculateTotalPrice(newQuantity);
-        return newQuantity;
+        return quantity - 1;
       }
       return prev;
     });
+
+    storeProductQty(props.name, "subtract");
   };
 
   const calculateTotalPrice = (qty: number) => {

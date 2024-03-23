@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
@@ -8,7 +8,8 @@ import Button from "../../components/ui/Button";
 import axios from "axios";
 
 function ShoppingCartPage() {
-  const { shoppingCartProduct } = useContext(ShoppingCartContext);
+  const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
+    useContext(ShoppingCartContext);
 
   // const handleCheckout = async () => {
   //   const response = await axios.post(
@@ -23,6 +24,10 @@ function ShoppingCartPage() {
   //     }
   //   );
   // };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [shoppingCartProduct]);
 
   return (
     <div className="p-6 md:py-32 md:max-w-[38rem] md:m-auto">
@@ -45,7 +50,7 @@ function ShoppingCartPage() {
       <ShoppingCartItemList />
       <div className="flex justify-between">
         <h5 className="text-lg font-normal">Total</h5>
-        <p className="text-lg font-bold">$100</p>
+        <p className="text-lg font-bold">${totalPrice}</p>
       </div>
       <Button
         className={`${styles.shopping_cart__btn_bg_color} text-white px-20 py-2.5 rounded mt-8 w-full`}
