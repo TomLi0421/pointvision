@@ -6,26 +6,26 @@ import styles from "./styles.module.css";
 import ShoppingCartItemList from "../../components/ShoppingCartItemList/ShoppingCartItemList";
 import Button from "../../components/ui/Button";
 import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 
 function ShoppingCartPage() {
   const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
     useContext(ShoppingCartContext);
 
   const handleCheckout = async () => {
-    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-    const response = await axios.post(
-      "http://localhost:3000/api/create-checkout-session",
-      {
-        products: shoppingCartProduct,
-      }
-    );
-    if (response.status === 200) {
-      const session = await response.data;
-      const result = await stripe!.redirectToCheckout({
-        sessionId: session.id,
-      });
-    }
+    // const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    // const response = await axios.post(
+    //   "http://localhost:3000/api/create-checkout-session",
+    //   {
+    //     products: shoppingCartProduct,
+    //   }
+    // );
+    // if (response.status === 200) {
+    //   const session = await response.data;
+    //   const result = await stripe!.redirectToCheckout({
+    //     sessionId: session.id,
+    //   });
+    // }
   };
 
   useEffect(() => {
