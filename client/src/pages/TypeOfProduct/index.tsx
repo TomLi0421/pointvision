@@ -3,14 +3,28 @@ import { useParams } from "react-router-dom";
 import ProductCardList from "../../components/ProductCardList/ProductCardList";
 import ProductProvider from "../../context/ProductContext";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TypeOfProductPage() {
   const { type } = useParams<{ type: string }>();
-
   const splitItems = type!.replace(/([a-z])([A-Z])/g, "$1 $2");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `PointVision - ${splitItems}`;
+    const types = [
+      "VR Controller",
+      "Comfort and Care",
+      "Haptic Devices",
+      "Cables, Chargers and Batteries",
+      "Treadmills and Fitness",
+      "Audio",
+    ];
+
+    if (!types.includes(splitItems)) {
+      navigate("/NotFound");
+    }
   }, []);
 
   return (
