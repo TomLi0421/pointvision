@@ -10,7 +10,8 @@ function ShippingPage() {
     document.title = "PointVision - Shipping";
     const numberOfCartItem = localStorage.getItem("shoppingCartQty");
 
-    if (!numberOfCartItem) {
+    if (numberOfCartItem == "0" || numberOfCartItem == null) {
+      console.log("Your shopping cart is empty");
       navigate("/shopping_cart");
       toast.error("Your shopping cart is empty", {
         position: "top-right",
