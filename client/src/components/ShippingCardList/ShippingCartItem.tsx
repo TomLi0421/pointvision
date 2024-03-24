@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ShoppingCartItemDetail from "./ShoppingItemDetail/ShoppingCartItemDetail";
+import ShippingItemDetail from "./ShippingItemDetail/ShippingItemDetail";
 import axios from "axios";
 
-function ShoppingCartItem(props: any) {
+function ShippingCartItem(props: any) {
   const [product, setProduct] = useState<any>([]);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
@@ -30,7 +30,7 @@ function ShoppingCartItem(props: any) {
       )}
 
       {isDataLoaded && (
-        <ShoppingCartItemDetail
+        <ShippingItemDetail
           brand={product.brand}
           qty={props.productQty}
           price={product.price}
@@ -41,4 +41,4 @@ function ShoppingCartItem(props: any) {
   );
 }
 
-export default ShoppingCartItem;
+export default ShippingCartItem;
