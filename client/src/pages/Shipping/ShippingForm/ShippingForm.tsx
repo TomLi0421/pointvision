@@ -72,7 +72,7 @@ function ShippingForm() {
         name="email"
         placeholder="Enter your email"
       />
-      <h2 className="mb-4 font-bold">Shopping address</h2>
+      <h2 className="mb-4 font-bold">Shipping address</h2>
 
       <select
         ref={(el) => (inputRefs.current.country = el as HTMLSelectElement)}

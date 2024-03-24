@@ -3,7 +3,7 @@ import LoginPage from "./Login";
 import NotFoundPage from "./NotFound";
 import ProductPage from "./Product";
 import ProductDetailPage from "./ProductDetail";
-import RegisterPage from "./RegisterForm";
+import RegisterPage from "./Register";
 import ShoppingCartPage from "./ShoppingCart";
 import TypeOfProductPage from "./TypeOfProduct";
 import { routerType } from "./types/router.types";

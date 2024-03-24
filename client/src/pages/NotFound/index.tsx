@@ -23,11 +23,13 @@ function NotFoundPage() {
         </p>
 
         <div className="flex flex-col items-center md:flex-row md:justify-center">
-          <Button
-            className={`${styles.not_found__home_btn} text-white rounded py-4 px-6 mb-1 md:mr-1 md:mb-0`}
-          >
-            <Link to="/">Go to homepage</Link>
-          </Button>
+          <Link to="/">
+            <Button
+              className={`${styles.not_found__home_btn} text-white rounded py-4 px-6 mb-1 md:mr-1 md:mb-0`}
+            >
+              Go to homepage
+            </Button>
+          </Link>
           <Button
             className={`${styles.not_found__contact_btn} border border-solid py-4 px-12 rounded hover:text-white`}
           >

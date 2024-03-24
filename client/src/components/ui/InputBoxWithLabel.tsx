@@ -13,7 +13,6 @@ const InputBoxWithLabel = forwardRef((props: any, ref: any) => {
         id={props.id}
         name={props.name}
         placeholder={props.placeholder}
-        required
       />
     </div>
   );
