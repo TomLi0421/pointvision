@@ -5,6 +5,12 @@ import styles from "./LoginForm.module.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { useContext } from "react";
+import { LoggedinContext } from "../../../context/LoggedinContext";
+
+const cookies = new Cookies();
 
 type Inputs = {
   email: string;
@@ -18,6 +24,9 @@ function LoginForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(LoggedinContext);
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
@@ -27,9 +36,16 @@ function LoginForm() {
         }
       );
 
-      console.log(response.data);
+      if (response.status === 200) {
+        cookies.set("token", response.data.token, {
+          path: "/",
+        });
+
+        setIsLoggedIn(true);
+        navigate("/purchase_history");
+      }
     } catch (error: any) {
-      if (error.response && error.response.status === 404) {
+      if (error.response && error.response.status === 401) {
         toast.error(`${error.response.data.message}`, {
           position: "top-right",
           autoClose: 5000,

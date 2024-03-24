@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm/LoginForm";
 import styles from "./styles.module.css";
 import { useEffect } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 function LoginPage() {
+  const navigate = useNavigate();
   useEffect(() => {
     document.title = "PointVision - Login";
+
+    // get cookie from browser if logged in
+    const token = cookies.get("token");
+    if (token) {
+      navigate("/purchase_history");
+    }
   }, []);
 
   return (

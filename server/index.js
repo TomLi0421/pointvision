@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
 const User = require("./models/user");
+const auth = require("./auth");
 
 // aws service only
 // const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
@@ -181,6 +182,7 @@ app.post("/api/user/register", async (req, res) => {
 
 app.post("/api/user/login", async (req, res) => {
   const { user } = req.body;
+  console.log(req.body);
 
   try {
     const userEmail = await User.findOne({
@@ -188,7 +190,7 @@ app.post("/api/user/login", async (req, res) => {
     });
 
     if (!userEmail) {
-      return res.status(404).send({
+      return res.status(401).send({
         message: "Incorrect email or password",
       });
     }
@@ -199,7 +201,7 @@ app.post("/api/user/login", async (req, res) => {
     );
 
     if (!isPasswordMatch) {
-      return res.status(404).send({
+      return res.status(401).send({
         message: "Incorrect email or password",
       });
     }
@@ -216,11 +218,20 @@ app.post("/api/user/login", async (req, res) => {
       token,
     });
   } catch (e) {
-    res.status(404).send({
+    res.status(401).send({
       message: "An error occurred during login",
       e,
     });
   }
+});
+
+// authentication endpoint
+app.get("/api/user/purchaseHistory", auth, async (req, res) => {
+  User.findOne({ email: req.user.userEmail }).then((result) => {
+    console.log(result);
+  });
+
+  res.json({ message: "You are authorized to access me" });
 });
 
 // AWS S3 query

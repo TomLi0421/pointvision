@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import Badge from "@mui/joy/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
+import { LoggedinContext } from "../../context/LoggedinContext";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { isLoggedIn } = useContext(LoggedinContext);
   const { shoppingCartQty } = useContext(ShoppingCartContext);
 
   return (
@@ -62,17 +65,30 @@ export default function NavBar() {
           <Link to="#" className="text-xl block lg:inline-block lg:mr-4">
             About Us
           </Link>
-          <Link to="/login" className="text-xl block lg:hidden">
-            Login / Register
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/purchase_history" className="text-xl block lg:hidden">
+              <PersonIcon />
+            </Link>
+          ) : (
+            <Link to="/login" className="text-xl block lg:hidden">
+              Login / Register
+            </Link>
+          )}
         </div>
       </div>
 
       {/* display on desktop size */}
       <div className="hidden lg:flex lg:gap-x-3 lg:ml-auto">
-        <Link to="/login" className="block lg:inline-block">
-          Login / Register
-        </Link>
+        {isLoggedIn ? (
+          <Link to="/purchase_history" className="block lg:inline-block">
+            <PersonIcon />
+          </Link>
+        ) : (
+          <Link to="/login" className="block lg:inline-block">
+            Login / Register
+          </Link>
+        )}
+
         <Link to="/shopping_cart">
           <Badge badgeContent={shoppingCartQty}>
             <ShoppingCartIcon />
