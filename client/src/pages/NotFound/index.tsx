@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import styles from "./NotFound.module.css";
+import { useEffect } from "react";
 
 function NotFoundPage() {
+  useEffect(() => {
+    document.title = "PointVision - Not Found";
+  }, []);
   return (
     <div className="flex justify-center my-28">
       <div className="text-center max-w-[31rem] ">

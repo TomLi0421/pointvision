@@ -28,6 +28,10 @@ function ShoppingCartPage() {
   };
 
   useEffect(() => {
+    document.title = "PointVision - Shopping Cart";
+  }, []);
+
+  useEffect(() => {
     calculateTotalPrice();
   }, [shoppingCartProduct]);
 

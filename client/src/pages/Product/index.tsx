@@ -5,8 +5,13 @@ import { accessoriesTypeData } from "../../data/accessories_type_data";
 import ProductCardList from "../../components/ProductCardList/ProductCardList";
 import AccessoriesCard from "../../components/AccessoriesType/AccessoriesTypeCard";
 import ProductProvider from "../../context/ProductContext";
+import { useEffect } from "react";
 
 function ProductPage() {
+  useEffect(() => {
+    document.title = "PointVision - Product";
+  }, []);
+
   return (
     <ProductProvider>
       <div className={`${styles.product__type__bg_color} p-6 lg:px-36`}>

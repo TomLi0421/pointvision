@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import AccessoriesTypeList from "../../components/AccessoriesType/AccessoriesTypeList";
 import Feature from "./Feature/Feature";
 import Hero from "./Hero/Hero";
 import Subscription from "./Subscription/Subscription";
 
 function HomePage() {
+  useEffect(() => {
+    document.title = "PointVision";
+  }, []);
   return (
     <>
       <Hero />

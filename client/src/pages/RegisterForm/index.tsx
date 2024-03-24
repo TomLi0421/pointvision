@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import { useEffect } from "react";
 
 function RegisterPage() {
+  useEffect(() => {
+    document.title = "PointVision - Register";
+  }, []);
+
   return (
     <div className="p-6 md:py-32 md:max-w-[34rem] md:m-auto">
       <div>

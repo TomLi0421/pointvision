@@ -2,11 +2,16 @@ import { Breadcrumbs, Link, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ProductCardList from "../../components/ProductCardList/ProductCardList";
 import ProductProvider from "../../context/ProductContext";
+import { useEffect } from "react";
 
 function TypeOfProductPage() {
   const { type } = useParams<{ type: string }>();
 
   const splitItems = type!.replace(/([a-z])([A-Z])/g, "$1 $2");
+
+  useEffect(() => {
+    document.title = `PointVision - ${splitItems}`;
+  }, []);
 
   return (
     <ProductProvider>

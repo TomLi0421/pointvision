@@ -14,6 +14,7 @@ function ProductDetailPage() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
+    document.title = `PointVision - ${productName}`;
     getProduct();
   }, []);
 

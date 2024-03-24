@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm/LoginForm";
 import styles from "./styles.module.css";
+import { useEffect } from "react";
 
 function LoginPage() {
+  useEffect(() => {
+    document.title = "PointVision - Login";
+  }, []);
+
   return (
     <div className="p-6 md:py-32 md:max-w-[34rem] md:m-auto">
       <div>
