@@ -1,7 +1,11 @@
+import axios from "axios";
 import Button from "../../../components/ui/Button";
 import InputBoxWithLabel from "../../../components/ui/InputBoxWithLabel";
 import styles from "./RegisterForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Inputs = {
   firstName: string;
@@ -21,7 +25,51 @@ function RegisterForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/user/register",
+        {
+          newUser: data,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success(
+          `${response.data.message}. Redirect to login page after 3 seconds...`,
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        toast.error(`${error.response.data.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,7 +101,6 @@ function RegisterForm() {
           <p className="mb-5 text-red-500">{errors.lastName?.message}</p>
         </div>
       </div>
-
       <div>
         <InputBoxWithLabel
           {...register("email", {
@@ -71,7 +118,6 @@ function RegisterForm() {
         />
         <p className="mb-5 text-red-500">{errors.email?.message}</p>
       </div>
-
       <div>
         <InputBoxWithLabel
           {...register("phone", {
@@ -89,7 +135,6 @@ function RegisterForm() {
         />
         <p className="mb-5 text-red-500">{errors.phone?.message}</p>
       </div>
-
       <div>
         <InputBoxWithLabel
           {...register("address", {
@@ -104,7 +149,6 @@ function RegisterForm() {
         />
         <p className="mb-5 text-red-500">{errors.address?.message}</p>
       </div>
-
       <div className="md:grid md:grid-cols-2 md:gap-x-3">
         <div>
           <InputBoxWithLabel
@@ -145,12 +189,12 @@ function RegisterForm() {
           </p>
         </div>
       </div>
-
       <Button
         className={`${styles.register_form__btn_bg_color} w-full text-white py-3.5 rounded-full shadow-lg`}
       >
         Login
       </Button>
+      <ToastContainer />
     </form>
   );
 }

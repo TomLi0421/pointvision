@@ -8,6 +8,7 @@ import ShoppingCartPage from "./ShoppingCart";
 import TypeOfProductPage from "./TypeOfProduct";
 import { routerType } from "./types/router.types";
 import ShippingPage from "./Shipping";
+import PurchaseHistoryPage from "./PurchaseHistory";
 
 const pageData: routerType[] = [
   {
@@ -39,6 +40,11 @@ const pageData: routerType[] = [
     path: "register",
     element: <RegisterPage />,
     title: "register",
+  },
+  {
+    path: "purchase_history",
+    element: <PurchaseHistoryPage />,
+    title: "purchase history",
   },
   {
     path: "shopping_cart",

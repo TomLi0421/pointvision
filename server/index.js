@@ -3,8 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const cors = require("cors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Product = require("./models/product");
+const User = require("./models/user");
 
 // aws service only
 // const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
@@ -27,6 +30,13 @@ const Product = require("./models/product");
 // express app
 const app = express();
 app.use(express.json());
+// middleware allows localhost:5173 to access the server
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
+app.use(express.urlencoded({ extended: true }));
 
 // connect to mongodb
 const dbURI = process.env.DATABASE_URL;
@@ -39,14 +49,6 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
-
-// middleware allows localhost:5173 to access the server
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
-app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/get-all-product", async (req, res) => {
   // mongoose query
@@ -96,7 +98,6 @@ app.get("/api/get-all-product", async (req, res) => {
       res.send(result);
     })
     .catch((e) => {
-      console.log(e);
       res.status(500).send({ message: "Server error" });
     });
 });
@@ -147,6 +148,78 @@ app.post("/api/create-checkout-session", async (req, res) => {
     res.status(200).send({ id: session.id });
   } catch (e) {
     res.status(500).send({ error: e.message });
+  }
+});
+
+app.post("/api/user/register", async (req, res) => {
+  try {
+    const { newUser } = req.body;
+
+    const existingUser = await User.findOne({
+      $or: [{ email: newUser.email }, { phone: newUser.phone }],
+    });
+
+    if (existingUser) {
+      return res
+        .status(400)
+        .send({ message: "This email or phone number is registered" });
+    }
+
+    // bcrypt password
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashedPassword = bcrypt.hashSync(newUser.password, salt);
+    newUser.password = hashedPassword;
+
+    // mongoose query
+    const result = await User.create(newUser);
+    res.send({ message: "User Created Successfully", result });
+  } catch (e) {
+    res.status(500).send({ message: "Unable to create a user account", e });
+  }
+});
+
+app.post("/api/user/login", async (req, res) => {
+  const { user } = req.body;
+
+  try {
+    const userEmail = await User.findOne({
+      email: user.email,
+    });
+
+    if (!userEmail) {
+      return res.status(404).send({
+        message: "Incorrect email or password",
+      });
+    }
+
+    const isPasswordMatch = bcrypt.compareSync(
+      user.password,
+      userEmail.password
+    );
+
+    if (!isPasswordMatch) {
+      return res.status(404).send({
+        message: "Incorrect email or password",
+      });
+    }
+
+    const token = jwt.sign(
+      { userId: userEmail._id, userEmail: userEmail.email },
+      "RANDOM-TOKEN",
+      { expiresIn: "24h" }
+    );
+
+    res.status(200).send({
+      message: "Login Successful",
+      email: user.email,
+      token,
+    });
+  } catch (e) {
+    res.status(404).send({
+      message: "An error occurred during login",
+      e,
+    });
   }
 });
 

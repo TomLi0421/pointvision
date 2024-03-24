@@ -26,7 +26,7 @@ function ShippingPage() {
   }, []);
 
   return (
-    <div className="p-6 md:py-32 md:max-w-[34rem] md:m-auto">
+    <div className="p-6 md:py-32 md:max-w-[45rem] md:m-auto">
       <ShippingForm />
     </div>
   );
