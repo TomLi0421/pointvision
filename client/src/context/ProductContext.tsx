@@ -20,7 +20,7 @@ export default function ProductProvider({ children }: ProductProviderProps) {
 
   const getProducts = async () => {
     const response = await axios.get(
-      "http://localhost:3000/api/get-all-product"
+      "http://localhost:3000/api/get-products/get-all-products"
     );
 
     setProducts(response.data);

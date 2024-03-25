@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema(
   {
-    transactionSession: {
+    id: {
       type: String,
       required: true,
     },
@@ -41,6 +41,7 @@ const transactionSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
+      enum: ["Pending", "Shipping", "Delivered", "Cancelled"],
     },
   },
   { timestamps: true }

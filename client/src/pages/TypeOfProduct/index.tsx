@@ -14,15 +14,15 @@ function TypeOfProductPage() {
   useEffect(() => {
     document.title = `PointVision - ${splitItems}`;
     const types = [
-      "VR Controller",
-      "Comfort and Care",
-      "Haptic Devices",
-      "Cables, Chargers and Batteries",
-      "Treadmills and Fitness",
+      "VRController",
+      "ComfortAndCare",
+      "HapticDevices",
+      "Cable",
+      "TreadmillsAndFitness",
       "Audio",
     ];
 
-    if (!types.includes(splitItems)) {
+    if (!types.includes(type!)) {
       navigate("/NotFound");
     }
   }, []);

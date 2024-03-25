@@ -12,7 +12,7 @@ function ShoppingCartItem(props: any) {
 
   const getProduct = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/get-product/${props.productName}`
+      `http://localhost:3000/api/get-products/${props.productName}`
     );
 
     setProduct(response.data);

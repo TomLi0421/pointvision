@@ -20,7 +20,7 @@ function ProductDetailPage() {
 
   const getProduct = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/get-product/${formattedProductName}`
+      `http://localhost:3000/api/get-products/${formattedProductName}`
     );
 
     setProduct(response.data);

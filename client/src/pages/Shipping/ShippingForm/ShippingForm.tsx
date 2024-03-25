@@ -8,6 +8,7 @@ import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../../context/ShoppingCartContext";
+import { ShippingInfoContext } from "../../../context/ShippingInfoContext";
 
 type Inputs = {
   email: string;
@@ -28,26 +29,27 @@ function ShippingForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
-    useContext(ShoppingCartContext);
+  const { shoppingCartProduct } = useContext(ShoppingCartContext);
+  const { updateShippingInfo } = useContext(ShippingInfoContext);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-    const response = await axios.post(
-      "http://localhost:3000/api/create-checkout-session",
-      {
-        products: shoppingCartProduct,
-        shippingDetail: data,
-      }
-    );
+    try {
+      updateShippingInfo(data);
 
-    if (response.status === 200) {
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+      const response = await axios.post(
+        "http://localhost:3000/api/stripe/create-checkout-session",
+        {
+          shoppingCartProduct: shoppingCartProduct,
+          shippingInfo: data,
+        }
+      );
+
       const session = await response.data;
-      console.log(session);
       const result = await stripe!.redirectToCheckout({
         sessionId: session.id,
       });
-    }
+    } catch (error: any) {}
   };
 
   return (
