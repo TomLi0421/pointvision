@@ -55,9 +55,15 @@ function ShoppingCartPage() {
       </p>
       <ShoppingCartItemList />
       <div className="flex justify-between">
+        <h5 className="text-lg font-normal">Shipping fees</h5>
+        <p className="text-lg font-bold">${10}</p>
+      </div>
+
+      <div className="flex justify-between">
         <h5 className="text-lg font-normal">Total</h5>
         <p className="text-lg font-bold">${totalPrice}</p>
       </div>
+
       <Link to="/shopping_cart/shipping">
         <Button
           className={`${styles.shopping_cart__btn_bg_color} text-white px-20 py-2.5 rounded mt-8 w-full`}

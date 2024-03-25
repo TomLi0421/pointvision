@@ -3,9 +3,11 @@ import Button from "../../../components/ui/Button";
 import styles from "./ShippingForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 // import { Country, State, City } from "country-state-city";
-// import { ShoppingCartContext } from "../../context/ShoppingCartContext";
-// import axios from "axios";
-// import { loadStripe } from "@stripe/stripe-js";
+
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../../context/ShoppingCartContext";
 
 type Inputs = {
   email: string;
@@ -26,28 +28,27 @@ function ShippingForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
+    useContext(ShoppingCartContext);
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    const response = await axios.post(
+      "http://localhost:3000/api/create-checkout-session",
+      {
+        products: shoppingCartProduct,
+        shippingDetail: data,
+      }
+    );
+
+    if (response.status === 200) {
+      const session = await response.data;
+      console.log(session);
+      const result = await stripe!.redirectToCheckout({
+        sessionId: session.id,
+      });
+    }
   };
-
-  //   const { shoppingCartProduct, totalPrice, calculateTotalPrice } =
-  //     useContext(ShoppingCartContext);
-
-  //   const handleCheckout = async () => {
-  //     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
-  //     const response = await axios.post(
-  //       "http://localhost:3000/api/create-checkout-session",
-  //       {
-  //         products: shoppingCartProduct,
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       const session = await response.data;
-  //       const result = await stripe!.redirectToCheckout({
-  //         sessionId: session.id,
-  //       });
-  //     }
-  //   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -9,6 +9,8 @@ import TypeOfProductPage from "./TypeOfProduct";
 import { routerType } from "./types/router.types";
 import ShippingPage from "./Shipping";
 import PurchaseHistoryPage from "./PurchaseHistory";
+import CheckoutSuccessPage from "./CheckoutSuccess";
+import CheckoutFailPage from "./CheckoutFail";
 
 const pageData: routerType[] = [
   {
@@ -55,6 +57,16 @@ const pageData: routerType[] = [
     path: "shopping_cart/shipping",
     element: <ShippingPage />,
     title: "shipping",
+  },
+  {
+    path: "shopping_cart/shipping/checkout_success",
+    element: <CheckoutSuccessPage />,
+    title: "checkout success",
+  },
+  {
+    path: "shopping_cart/shipping/checkout_fail",
+    element: <CheckoutFailPage />,
+    title: "checkout fail",
   },
   {
     path: "*",

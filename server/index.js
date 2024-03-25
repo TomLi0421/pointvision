@@ -121,7 +121,10 @@ app.get("/api/get-product/:productName", async (req, res) => {
 });
 
 app.post("/api/create-checkout-session", async (req, res) => {
-  const { products } = req.body;
+  const { products, shippingDetail } = req.body;
+
+  console.log(products);
+  console.log(shippingDetail);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -143,10 +146,23 @@ app.post("/api/create-checkout-session", async (req, res) => {
           quantity: product.qty,
         };
       }),
-      success_url: `${process.env.CLIENT_URL}`,
+      success_url: `${process.env.CLIENT_URL}/shopping_cart/shipping/checkout_success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.CLIENT_URL}/shopping_cart/shipping/checkout_fail`,
     });
 
     res.status(200).send({ id: session.id });
+  } catch (e) {
+    res.status(500).send({ error: e.message });
+  }
+});
+
+app.get("/api/order/success", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.retrieve(
+      req.query.session_id
+    );
+
+    res.status(200).send({ message: "Payment Successful", session });
   } catch (e) {
     res.status(500).send({ error: e.message });
   }

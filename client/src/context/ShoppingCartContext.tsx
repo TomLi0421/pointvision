@@ -21,6 +21,7 @@ export const ShoppingCartContext = createContext({
   storeProductQty: (productName: String, action: String) => {},
   totalPrice: 0,
   calculateTotalPrice: () => {},
+  resetShoppingCart: () => {},
 });
 
 export default function ShoppingCartProvider({
@@ -166,12 +167,23 @@ export default function ShoppingCartProvider({
   // on shopping cart page, calculate the total price of all products in the shopping cart
   const calculateTotalPrice = () => {
     setTotalPrice((prev: any) => {
-      const total = shoppingCartProduct.reduce((acc: any, product: any) => {
-        return acc + product.price * product.qty;
-      }, 0);
+      const total = shoppingCartProduct.reduce(
+        (acc: any, product: any) => {
+          return acc + product.price * product.qty;
+        },
+        shoppingCartQty > 0 ? 10 : 0
+      );
 
       return total.toFixed(2);
     });
+  };
+
+  // on checkout_success page, reset the shopping cart
+  const resetShoppingCart = () => {
+    setShoppingCartQty(0);
+    setShoppingCartProduct([]);
+    localStorage.setItem("shoppingCartQty", "0");
+    localStorage.setItem("shoppingCartProducts", "[]");
   };
 
   return (
@@ -184,6 +196,7 @@ export default function ShoppingCartProvider({
         storeProductQty: storeProductQty,
         totalPrice: totalPrice,
         calculateTotalPrice: calculateTotalPrice,
+        resetShoppingCart: resetShoppingCart,
       }}
     >
       {children}
