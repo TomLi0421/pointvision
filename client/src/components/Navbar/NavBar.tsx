@@ -62,8 +62,11 @@ export default function NavBar() {
           <Link to="/product" className="text-xl block lg:inline-block lg:mr-4">
             Product
           </Link>
-          <Link to="#" className="text-xl block lg:inline-block lg:mr-4">
-            About Us
+          <Link
+            to="/order_search"
+            className="text-xl block lg:inline-block lg:mr-4"
+          >
+            Order Search
           </Link>
           {isLoggedIn ? (
             <Link to="/purchase_history" className="text-xl block lg:hidden">

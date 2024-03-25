@@ -11,6 +11,7 @@ import ShippingPage from "./Shipping";
 import PurchaseHistoryPage from "./PurchaseHistory";
 import CheckoutSuccessPage from "./CheckoutSuccess";
 import CheckoutFailPage from "./CheckoutFail";
+import SearchingOrderPage from "./SearchingOrder";
 
 const pageData: routerType[] = [
   {
@@ -32,6 +33,11 @@ const pageData: routerType[] = [
     path: "product/:type/:productName",
     element: <ProductDetailPage />,
     title: "product detail",
+  },
+  {
+    path: "/order_search",
+    element: <SearchingOrderPage />,
+    title: "order search",
   },
   {
     path: "login",

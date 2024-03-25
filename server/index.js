@@ -7,6 +7,7 @@ const loginRouter = require("./router/login");
 const registerRouter = require("./router/register");
 const getProductsRouter = require("./router/getProducts");
 const stripeRouter = require("./router/stripe");
+const searchOrderRouter = require("./router/searchOrder");
 const purchaseHistoryRouter = require("./router/purchaseHistory");
 const auth = require("./auth");
 
@@ -55,7 +56,8 @@ app.use("/api/get-products", getProductsRouter);
 app.use("/api/user/login", loginRouter);
 app.use("/api/user/register", registerRouter);
 app.use("/api/stripe", stripeRouter);
-app.use("/api/user/", auth, purchaseHistoryRouter);
+app.use("/api/search/order", searchOrderRouter);
+app.use("/api/user", auth, purchaseHistoryRouter);
 
 // AWS S3 query
 // const getObjectParams = {

@@ -1,6 +1,9 @@
-export default function InputBox(props: any) {
+import { forwardRef } from "react";
+
+const InputBox = forwardRef((props: any, ref) => {
   return (
     <input
+      ref={ref}
       {...props}
       type={props.type}
       placeholder={props.placeholder}
@@ -8,4 +11,6 @@ export default function InputBox(props: any) {
       required
     />
   );
-}
+});
+
+export default InputBox;

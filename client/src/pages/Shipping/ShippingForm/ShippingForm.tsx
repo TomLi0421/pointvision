@@ -3,12 +3,10 @@ import Button from "../../../components/ui/Button";
 import styles from "./ShippingForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 // import { Country, State, City } from "country-state-city";
-
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../../context/ShoppingCartContext";
-import { ShippingInfoContext } from "../../../context/ShippingInfoContext";
 
 type Inputs = {
   email: string;
@@ -30,12 +28,9 @@ function ShippingForm() {
   } = useForm<Inputs>();
 
   const { shoppingCartProduct } = useContext(ShoppingCartContext);
-  const { updateShippingInfo } = useContext(ShippingInfoContext);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      updateShippingInfo(data);
-
       const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
       const response = await axios.post(
         "http://localhost:3000/api/stripe/create-checkout-session",
