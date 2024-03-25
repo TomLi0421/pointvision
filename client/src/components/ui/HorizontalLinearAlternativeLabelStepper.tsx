@@ -3,12 +3,12 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-const steps = ["Prepare", "Shipping", "Delivery"];
+const steps = ["Prepare", "Shipping", "Delivered"];
 
-export default function HorizontalLinearAlternativeLabelStepper() {
+export default function HorizontalLinearAlternativeLabelStepper(props: any) {
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={0} alternativeLabel>
+      <Stepper activeStep={steps.indexOf(props.status)} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

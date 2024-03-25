@@ -10,7 +10,14 @@ router.get("/order/success", async (req, res) => {
       req.query.session_id
     );
 
-    res.status(200).send({ message: "Payment Successful", session });
+    const customers = await stripe.customers.retrieve(session.customer);
+
+    const billingInfo = session.customer_details;
+    const transactionInfo = JSON.parse(customers.metadata.transactionInfo);
+
+    res
+      .status(200)
+      .send({ message: "Payment Successful", billingInfo, transactionInfo });
   } catch (e) {
     res.status(500).send({ error: e.message });
   }
@@ -19,7 +26,7 @@ router.get("/order/success", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   const { shoppingCartProduct, shippingInfo } = req.body;
 
-  const completeAddress = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.region}, ${shippingInfo.country}, ${shippingInfo.zipCode}`;
+  const completeAddress = `${shippingInfo.address} ${shippingInfo.city} ${shippingInfo.region} ${shippingInfo.country} ${shippingInfo.zipCode}`;
   const items = shoppingCartProduct.map((product) => {
     return {
       name: product.name,
@@ -44,7 +51,7 @@ router.post("/create-checkout-session", async (req, res) => {
     phone: shippingInfo.phone,
     items: items,
     amount: totalAmount,
-    status: "Pending",
+    status: "Prepare",
   };
 
   try {
@@ -55,6 +62,31 @@ router.post("/create-checkout-session", async (req, res) => {
     });
 
     const session = await stripe.checkout.sessions.create({
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 1000,
+              currency: "usd",
+            },
+            display_name: "Next day shipping",
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 2,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 5,
+              },
+            },
+          },
+        },
+      ],
+      phone_number_collection: {
+        enabled: true,
+      },
       payment_method_types: ["card"],
       billing_address_collection: "required",
       mode: "payment",

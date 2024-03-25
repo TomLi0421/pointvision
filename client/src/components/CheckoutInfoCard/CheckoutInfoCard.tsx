@@ -9,11 +9,8 @@ function CheckoutInfoCard(props: any) {
           {props.firstName} {props.lastName}
         </h3>
         <p className="font-normal text-sm">{props.email}</p>
-        <p className="font-normal text-sm mb-2">+852 {props.phone}</p>
-        <p className="font-normal text-sm">
-          {props.address}, {props.city}, {props.region}, {props.country},{" "}
-          {props.zipCode}
-        </p>
+        <p className="font-normal text-sm mb-2">{props.phone}</p>
+        <p className="font-normal text-sm">{props.address}</p>
       </div>
     </div>
   );

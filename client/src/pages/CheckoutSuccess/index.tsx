@@ -8,14 +8,32 @@ import CheckoutInfoCard from "../../components/CheckoutInfoCard/CheckoutInfoCard
 import ShippingCardList from "../../components/ShippingCardList/ShippingCardList";
 import Button from "../../components/ui/Button";
 import styles from "./styles.module.css";
-import { ShippingInfoContext } from "../../context/ShippingInfoContext";
+
+interface ShippingInfo {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  items: [];
+  amount: number;
+  status: string;
+}
+
+interface BillingInfo {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
 
 function CheckoutSuccessPage() {
   const [checkoutSession] = useSearchParams();
   const { resetShoppingCart } = useContext(ShoppingCartContext);
 
-  const { shippingInfo } = useContext(ShippingInfoContext);
-  const [billingInfo, setBillingInfo] = useState({});
+  const [billingInfo, setBillingInfo] = useState<BillingInfo>();
+  const [shippingInfo, setShippingInfo] = useState<ShippingInfo>();
 
   const navigate = useNavigate();
 
@@ -36,8 +54,18 @@ function CheckoutSuccessPage() {
       );
 
       if (response.status === 200) {
-        // resetShoppingCart();
-        setBillingInfo(response.data);
+        resetShoppingCart();
+        setShippingInfo(response.data.transactionInfo);
+
+        let completedAddress = "";
+        for (let key in response.data.billingInfo.address) {
+          let value = response.data.billingInfo.address[key];
+          if (value !== null) {
+            completedAddress += value + " ";
+          }
+        }
+        response.data.billingInfo.address = completedAddress;
+        setBillingInfo(response.data.billingInfo);
       }
     } catch (error: any) {
       if (error.response && error.response.status === 500) {
@@ -46,52 +74,61 @@ function CheckoutSuccessPage() {
     }
   };
 
-  // console.log(billingInfo.session);
-
   return (
     <div className="p-3 mt-14 md:max-w-[70rem] md:mx-auto">
-      <HorizontalLinearAlternativeLabelStepper />
+      {shippingInfo && (
+        <HorizontalLinearAlternativeLabelStepper status={shippingInfo.status} />
+      )}
+
       <div className="mt-20 px-5 flex items-center mb-6 md:max-w-[35rem] md:mx-auto">
         <img className="w-16 mr-5" src={success} alt="success" />
         <div>
           <h1 className="text-lg font-medium">Thank You!</h1>
           <p className="font-normal text-base">
-            Your order #BF12345 has been placed.
+            Your order #{shippingInfo && shippingInfo.id} has been placed.
           </p>
         </div>
       </div>
       <div className="px-5 md:mx-auto md:max-w-[35rem]">
         <p className="mb-6">
-          We send an email to
-          <span className="font-medium">orders@banuelson.com</span> with your
-          order confirmation and bill.
+          We send an email to {""}
+          <span className="font-medium">
+            {shippingInfo && shippingInfo.email}
+          </span>{" "}
+          with your order confirmation and bill.
         </p>
-        <p className="font-medium text-sm mb-6">
+        {/* <p className="font-medium text-sm mb-6">
           Time placed: 17/02/2020 12:45 GMT
-        </p>
+        </p> */}
 
-        <CheckoutInfoCard
-          title="Shipping"
-          firstName={shippingInfo.firstName}
-          lastName={shippingInfo.lastName}
-          email={shippingInfo.email}
-          phone={shippingInfo.phone}
-          address={shippingInfo.address}
-          region={shippingInfo.region}
-          city={shippingInfo.city}
-          country={shippingInfo.country}
-          zipCode={shippingInfo.zipCode}
-        />
+        {shippingInfo && (
+          <CheckoutInfoCard
+            title="Shipping"
+            firstName={shippingInfo.firstName}
+            lastName={shippingInfo.lastName}
+            email={shippingInfo.email}
+            phone={`+852${shippingInfo.phone}`}
+            address={shippingInfo.address}
+          />
+        )}
 
-        {/* {billingInfo.session && (
+        {billingInfo && (
           <CheckoutInfoCard
             title="Billing"
-            address={billingInfo.session.customer_details.address.line1}
+            firstName={billingInfo.name}
+            email={billingInfo.email}
+            phone={billingInfo.phone}
+            address={billingInfo.address}
           />
-        )} */}
+        )}
 
         <h2 className="font-medium text-base">Order Items</h2>
-        <ShippingCardList />
+        {shippingInfo && (
+          <ShippingCardList
+            purchasedItems={shippingInfo.items}
+            purchasedItemsAmount={shippingInfo.amount}
+          />
+        )}
 
         <Link to="/product">
           <Button
