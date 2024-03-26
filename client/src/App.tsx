@@ -6,6 +6,7 @@ import Router from "./pages/router";
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import LoggedinProvider from "./context/LoggedinContext";
 import OrderProvider from "./context/OrderContext";
+import UserProvider from "./context/UserContex";
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
         <LoggedinProvider>
           <NavBar />
           <OrderProvider>
-            <Router />
+            <UserProvider>
+              <Router />
+            </UserProvider>
           </OrderProvider>
         </LoggedinProvider>
       </ShoppingCartProvider>

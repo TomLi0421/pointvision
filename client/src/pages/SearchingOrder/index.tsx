@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Button from "../../components/ui/Button";
 import InputBox from "../../components/ui/InputBox";
 import styles from "./styles.module.css";
@@ -6,15 +6,12 @@ import OrderTracker from "../../components/OrderTracker/OrderTracker";
 import { OrderContext } from "../../context/OrderContext";
 
 function SearchingOrderPage() {
+  const { isOrderFound, handleSearch } = useContext(OrderContext);
   const inputRef = useRef<HTMLInputElement>();
 
-  const { isOrderFound, handleSearch } = useContext(OrderContext);
-
-  const orderDetail = isOrderFound && (
-    <div className="md:max-w-[45rem] md:mx-auto">
-      <OrderTracker />
-    </div>
-  );
+  useEffect(() => {
+    document.title = "PointVision - Search Order";
+  }, []);
 
   return (
     <>
@@ -47,7 +44,11 @@ function SearchingOrderPage() {
           </Button>
         </form>
       </div>
-      <div>{orderDetail}</div>
+      {isOrderFound && (
+        <div className="md:max-w-[45rem] md:mx-auto">
+          <OrderTracker />
+        </div>
+      )}
     </>
   );
 }

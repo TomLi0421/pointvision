@@ -179,6 +179,7 @@ function CheckoutSuccessPage() {
           </Button>
         </Link>
       </div>
+      <ToastContainer />
     </div>
   );
 }

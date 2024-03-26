@@ -5,8 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 // import { Country, State, City } from "country-state-city";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ShoppingCartContext } from "../../../context/ShoppingCartContext";
+import { UserContext } from "../../../context/UserContex";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 type Inputs = {
   email: string;
@@ -28,6 +31,15 @@ function ShippingForm() {
   } = useForm<Inputs>();
 
   const { shoppingCartProduct } = useContext(ShoppingCartContext);
+  const { userData, handleUserData } = useContext(UserContext);
+
+  useEffect(() => {
+    const token = cookies.get("token");
+
+    if (token) {
+      handleUserData();
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
