@@ -1,5 +1,7 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface ProductProviderProps {
   children: ReactNode;
@@ -19,12 +21,27 @@ export default function ProductProvider({ children }: ProductProviderProps) {
   }, []);
 
   const getProducts = async () => {
-    const response = await axios.get(
-      "http://localhost:3000/api/get-products/get-all-products"
-    );
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/get-products/get-all-products"
+      );
 
-    setProducts(response.data);
-    setIsDataLoaded(true);
+      if (response.status === 200) {
+        setProducts(response.data);
+        setIsDataLoaded(true);
+      }
+    } catch (e) {
+      toast.error("Internal server error", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (
@@ -35,6 +52,7 @@ export default function ProductProvider({ children }: ProductProviderProps) {
       }}
     >
       {children}
+      <ToastContainer />
     </ProductContext.Provider>
   );
 }

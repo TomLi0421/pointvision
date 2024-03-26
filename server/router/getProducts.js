@@ -45,13 +45,19 @@ router.get("/get-all-products", async (req, res) => {
   //     console.log(err);
   //   });
 
-  Product.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((e) => {
-      res.status(500).send({ message: "Server error" });
+  try {
+    Product.find()
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((e) => {
+        res.status(500).send({ message: "Server error" });
+      });
+  } catch (e) {
+    res.status(500).send({
+      message: "Internal server error",
     });
+  }
 });
 
 router.get("/:productName", async (req, res) => {

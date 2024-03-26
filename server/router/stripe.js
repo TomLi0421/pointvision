@@ -15,11 +15,15 @@ router.get("/order/success", async (req, res) => {
     const billingInfo = session.customer_details;
     const transactionInfo = JSON.parse(customers.metadata.transactionInfo);
 
-    res
-      .status(200)
-      .send({ message: "Payment Successful", billingInfo, transactionInfo });
+    if (session.status === "complete") {
+      res
+        .status(200)
+        .send({ message: "Payment Successful", billingInfo, transactionInfo });
+    }
   } catch (e) {
-    res.status(500).send({ error: e.message });
+    res.status(500).send({
+      message: "Internal server error",
+    });
   }
 });
 
@@ -113,7 +117,9 @@ router.post("/create-checkout-session", async (req, res) => {
 
     res.status(200).send({ id: session.id });
   } catch (e) {
-    res.status(500).send({ error: e.message });
+    res.status(500).send({
+      message: "Internal server error",
+    });
   }
 });
 

@@ -29,7 +29,7 @@ function PurchaseHistoryList(props: any) {
   return (
     <div className="md:max-w-[35rem] md:mx-auto">
       <Box sx={{ border: 1, borderColor: "grey.500", borderRadius: 1 }}>
-        {purchaseHistory.length > 0 && (
+        {filteredPurchaseHistory.length > 0 ? (
           <List>
             {filteredPurchaseHistory.map((purchase, index, array) => {
               return (
@@ -49,6 +49,10 @@ function PurchaseHistoryList(props: any) {
               );
             })}
           </List>
+        ) : (
+          <p className="text-center py-6 text-slate-400">
+            Purchase history not found
+          </p>
         )}
       </Box>
     </div>
