@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./pages/router";
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import LoggedinProvider from "./context/LoggedinContext";
+import OrderProvider from "./context/OrderContext";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <ShoppingCartProvider>
         <LoggedinProvider>
           <NavBar />
-          <Router />
+          <OrderProvider>
+            <Router />
+          </OrderProvider>
         </LoggedinProvider>
       </ShoppingCartProvider>
       <Footer />

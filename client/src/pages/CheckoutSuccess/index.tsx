@@ -8,6 +8,8 @@ import CheckoutInfoCard from "../../components/CheckoutInfoCard/CheckoutInfoCard
 import ShippingCardList from "../../components/ShippingCardList/ShippingCardList";
 import Button from "../../components/ui/Button";
 import styles from "./styles.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface ShippingInfo {
   id: string;
@@ -34,6 +36,7 @@ function CheckoutSuccessPage() {
 
   const [billingInfo, setBillingInfo] = useState<BillingInfo>();
   const [shippingInfo, setShippingInfo] = useState<ShippingInfo>();
+  const [orderCreatedDate, setorderCreatedDate] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -41,6 +44,10 @@ function CheckoutSuccessPage() {
     document.title = "Checkout Success";
     isCheckoutSuccess();
   }, []);
+
+  useEffect(() => {
+    getOrderCreatedDate();
+  }, [shippingInfo]);
 
   const isCheckoutSuccess = async () => {
     try {
@@ -74,6 +81,38 @@ function CheckoutSuccessPage() {
     }
   };
 
+  const getOrderCreatedDate = async () => {
+    try {
+      if (shippingInfo) {
+        const response = await axios.get(
+          "http://localhost:3000/api/search/order",
+          {
+            params: {
+              orderId: shippingInfo.id,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setorderCreatedDate(response.data.createdAt);
+        }
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        toast.error("Error occur cannot show the order placed date", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+  };
+
   return (
     <div className="p-3 mt-14 md:max-w-[70rem] md:mx-auto">
       {shippingInfo && (
@@ -97,9 +136,11 @@ function CheckoutSuccessPage() {
           </span>{" "}
           with your order confirmation and bill.
         </p>
-        {/* <p className="font-medium text-sm mb-6">
-          Time placed: 17/02/2020 12:45 GMT
-        </p> */}
+        {orderCreatedDate && (
+          <p className="font-medium text-sm mb-6">
+            Time placed: {new Date(orderCreatedDate).toLocaleString()}
+          </p>
+        )}
 
         {shippingInfo && (
           <CheckoutInfoCard

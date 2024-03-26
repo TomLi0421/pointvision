@@ -4,7 +4,6 @@ const Transaction = require("../models/transaction");
 
 router.get("/", async (req, res) => {
   const { orderId } = req.query;
-  console.log(orderId);
 
   Transaction.findOne({ id: orderId }).then((result) => {
     if (result) {
