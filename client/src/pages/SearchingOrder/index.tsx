@@ -38,7 +38,10 @@ function SearchingOrderPage() {
           />
           <Button
             className={`${styles.search_order__btn} w-full h-14 rounded`}
-            onClick={(e) => handleSearch(inputRef.current!.value, e)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleSearch(inputRef.current!.value);
+            }}
           >
             Search
           </Button>

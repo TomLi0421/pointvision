@@ -9,6 +9,7 @@ const getProductsRouter = require("./router/getProducts");
 const stripeRouter = require("./router/stripe");
 const searchOrderRouter = require("./router/searchOrder");
 const userDataRouter = require("./router/userData");
+const mailchimpRouter = require("./router/mailchimp");
 const auth = require("./auth");
 
 // aws service only
@@ -58,6 +59,7 @@ app.use("/api/user/register", registerRouter);
 app.use("/api/stripe", stripeRouter);
 app.use("/api/search/order", searchOrderRouter);
 app.use("/api/user", auth, userDataRouter);
+app.use("/api/mailchimp", mailchimpRouter);
 
 // AWS S3 query
 // const getObjectParams = {

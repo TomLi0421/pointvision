@@ -6,6 +6,7 @@ import Divider from "@mui/material/Divider";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContex";
 import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function PurchaseHistoryList(props: any) {
   const { purchaseHistory, handlePurchaseHistory } = useContext(UserContext);
@@ -34,16 +35,21 @@ function PurchaseHistoryList(props: any) {
             {filteredPurchaseHistory.map((purchase, index, array) => {
               return (
                 <div key={purchase.id}>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemText
-                        primary={`Order Id: #${purchase.id}`}
-                        secondary={`Order Payment: ${new Date(
-                          purchase.createdAt
-                        ).toLocaleString()}`}
-                      />
-                    </ListItemButton>
-                  </ListItem>
+                  <Link to={`/purchase_history/${purchase.id}`}>
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemText
+                          primary={`Order Id: #${purchase.id}`}
+                          secondary={`Order Payment: ${new Date(
+                            purchase.createdAt
+                          ).toLocaleString()}`}
+                        />
+                        <span className="text-blue-600 font-medium">
+                          {purchase.status}
+                        </span>
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
                   {index !== array.length - 1 && <Divider />}
                 </div>
               );

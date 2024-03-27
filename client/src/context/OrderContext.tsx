@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FormEvent, createContext, useEffect, useState } from "react";
+import { FormEvent, createContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,22 +14,20 @@ interface Order {
 interface OrderContextType {
   order: Order | null;
   isOrderFound: boolean;
-  handleSearch: (orderId: string, e: FormEvent<Element>) => void;
+  handleSearch: (orderId: string) => void;
 }
 
 export const OrderContext = createContext<OrderContextType>({
   order: null,
   isOrderFound: false,
-  handleSearch: (orderId: string, e: FormEvent) => {},
+  handleSearch: (orderId: string) => {},
 });
 
 export default function OrderProvider({ children }: any) {
   const [order, setOrder] = useState<Order | null>(null);
   const [isOrderFound, setIsOrderFound] = useState(false);
 
-  const handleSearch = async (orderId: string, e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSearch = async (orderId: string) => {
     try {
       const response = await axios.get(
         "http://localhost:3000/api/search/order",

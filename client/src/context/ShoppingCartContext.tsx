@@ -1,6 +1,4 @@
 import { ReactNode, createContext, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 interface ShoppingCartProviderProps {
   children: ReactNode;
@@ -46,16 +44,6 @@ export default function ShoppingCartProvider({
     qty: number;
     price: number;
   }) => {
-    toast.success("Added to cart", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
     updateShoppingCartQty(product.qty);
     updateShoppingCartProduct(product);
   };
@@ -200,7 +188,6 @@ export default function ShoppingCartProvider({
       }}
     >
       {children}
-      <ToastContainer />
     </ShoppingCartContext.Provider>
   );
 }

@@ -3,6 +3,8 @@ import Button from "../ui/Button";
 import styles from "./ProductDescription.module.css";
 import { ShoppingCartContext } from "../../context/ShoppingCartContext";
 import QtyInput from "../ui/QtyInput/QtyInput";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductDescription(props: any) {
   const { handleUpdateShoppingCart } = useContext(ShoppingCartContext);
@@ -53,7 +55,7 @@ function ProductDescription(props: any) {
       </div>
       <Button
         className={`${styles.product_description__btn_bg_color} text-white px-20 py-2.5 rounded mt-14`}
-        onClick={() =>
+        onClick={() => {
           handleUpdateShoppingCart({
             name: props.name,
             imgName: props.imgName,
@@ -61,11 +63,22 @@ function ProductDescription(props: any) {
             type: props.type,
             price: props.price,
             qty: quantity,
-          })
-        }
+          });
+          toast.success("Added to cart", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }}
       >
         Add to cart
       </Button>
+      <ToastContainer />
     </div>
   );
 }

@@ -30,7 +30,7 @@ function ProductPage() {
           sx={{
             display: "flex",
             gap: 1,
-            py: 1,
+            py: 3,
             overflow: "auto",
             width: "100%",
             scrollSnapType: "x mandatory",

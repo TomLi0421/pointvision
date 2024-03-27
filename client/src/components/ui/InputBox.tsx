@@ -8,6 +8,7 @@ const InputBox = forwardRef((props: any, ref) => {
       type={props.type}
       placeholder={props.placeholder}
       value={props.value}
+      pattern={props.pattern}
       required
     />
   );
