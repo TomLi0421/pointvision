@@ -7,6 +7,7 @@ import ShoppingCartProvider from "./context/ShoppingCartContext";
 import LoggedinProvider from "./context/LoggedinContext";
 import OrderProvider from "./context/OrderContext";
 import UserProvider from "./context/UserContex";
+import ProductProvider from "./context/ProductContext";
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <NavBar />
           <OrderProvider>
             <UserProvider>
-              <Router />
+              <ProductProvider>
+                <Router />
+              </ProductProvider>
             </UserProvider>
           </OrderProvider>
         </LoggedinProvider>

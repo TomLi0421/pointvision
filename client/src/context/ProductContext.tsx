@@ -7,14 +7,49 @@ interface ProductProviderProps {
   children: ReactNode;
 }
 
+interface Product {
+  imgName: never[];
+  type: string;
+  name: string;
+  brand: string;
+  price: number;
+  description: string;
+  compatible: string;
+  weight: string;
+  color: string;
+}
+
 export const ProductContext = createContext({
   products: [],
+  product: {
+    imgName: [],
+    type: "",
+    name: "",
+    brand: "",
+    price: 0,
+    description: "",
+    compatible: "",
+    weight: "",
+    color: "",
+  },
   isDataLoaded: false,
+  getProductByName: (productName: string) => {},
 });
 
 export default function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+  const [product, setProduct] = useState<Product>({
+    imgName: [],
+    type: "",
+    name: "",
+    brand: "",
+    price: 0,
+    description: "",
+    compatible: "",
+    weight: "",
+    color: "",
+  });
 
   useEffect(() => {
     getProducts();
@@ -44,11 +79,37 @@ export default function ProductProvider({ children }: ProductProviderProps) {
     }
   };
 
+  const getProductByName = async (productName: string) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/get-products/${productName}`
+      );
+
+      if (response.status === 200) {
+        setProduct(response.data);
+        setIsDataLoaded(true);
+      }
+    } catch (e) {
+      toast.error("Internal server error", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   return (
     <ProductContext.Provider
       value={{
         products: products,
+        product: product,
         isDataLoaded: isDataLoaded,
+        getProductByName: getProductByName,
       }}
     >
       {children}

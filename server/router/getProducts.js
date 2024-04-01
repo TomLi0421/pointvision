@@ -66,14 +66,13 @@ router.get("/:productName", async (req, res) => {
   Product.findOne({ name: productName })
     .then((result) => {
       if (result) {
-        res.send(result);
+        res.status(200).send(result);
       } else {
         res.status(404).send({ message: "Product not found" });
       }
     })
     .catch((e) => {
-      console.log(e);
-      res.status(500).send({ message: "Server error" });
+      res.status(500).send({ message: "Internal server error" });
     });
 });
 

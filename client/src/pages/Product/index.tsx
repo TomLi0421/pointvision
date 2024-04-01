@@ -4,7 +4,6 @@ import Box from "@mui/joy/Box";
 import { accessoriesTypeData } from "../../data/accessories_type_data";
 import ProductCardList from "../../components/ProductCardList/ProductCardList";
 import AccessoriesCard from "../../components/AccessoriesType/AccessoriesTypeCard";
-import ProductProvider from "../../context/ProductContext";
 import { useEffect } from "react";
 
 function ProductPage() {
@@ -13,7 +12,7 @@ function ProductPage() {
   }, []);
 
   return (
-    <ProductProvider>
+    <>
       <div className={`${styles.product__type__bg_color} p-6 lg:px-36`}>
         <div className="flex flex-col items-center mb-6 md:flex-row md:justify-between md:px-6">
           <h1 className="font-bold text-2xl text-center mb-14 md:mb-0">
@@ -55,7 +54,7 @@ function ProductPage() {
       <main className="p-6 lg:px-36 flex flex-col items-center">
         <ProductCardList />
       </main>
-    </ProductProvider>
+    </>
   );
 }
 

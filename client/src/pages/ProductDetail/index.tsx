@@ -2,30 +2,22 @@ import { Breadcrumbs, Link, Typography } from "@mui/material";
 import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
 import CustomCarousel from "../../components/ui/CustomCarousel";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect } from "react";
 import ProductDescription from "../../components/ProductDesciption/ProductDescription";
+import CustomAccordion from "../../components/ui/CustomAccordion";
+import { ProductContext } from "../../context/ProductContext";
+import Divider from "@mui/material/Divider";
 
 function ProductDetailPage() {
   const { productName } = useParams<{ productName: string }>();
   const formattedProductName = productName!.replace(/_/g, " ");
 
-  const [product, setProduct] = useState<any>({});
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const { product, isDataLoaded, getProductByName } =
+    useContext(ProductContext);
 
   useEffect(() => {
-    document.title = `PointVision - ${productName}`;
-    getProduct();
+    getProductByName(formattedProductName);
   }, []);
-
-  const getProduct = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/get-products/${formattedProductName}`
-    );
-
-    setProduct(response.data);
-    setIsDataLoaded(true);
-  };
 
   return (
     <>
@@ -41,7 +33,7 @@ function ProductDetailPage() {
             <Typography color="text.primary">{formattedProductName}</Typography>
           </Breadcrumbs>
         </div>
-        <main className="lg:grid lg:grid-cols-2 lg:gap-8">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
           {isDataLoaded && (
             <CustomCarousel
               images={product.imgName}
@@ -57,7 +49,31 @@ function ProductDetailPage() {
             description={product.description}
             imgName={product.imgName}
           />
-        </main>
+        </div>
+      </div>
+      <div className="p-6 lg:px-36">
+        {isDataLoaded && (
+          <>
+            {product.compatible && (
+              <>
+                <CustomAccordion
+                  title="Compatible with"
+                  description={product.compatible}
+                />
+              </>
+            )}
+            {product.weight && (
+              <>
+                <CustomAccordion title="Weight" description={product.weight} />
+              </>
+            )}
+            {product.color && (
+              <>
+                <CustomAccordion title="Color" description={product.color} />
+              </>
+            )}
+          </>
+        )}
       </div>
     </>
   );
