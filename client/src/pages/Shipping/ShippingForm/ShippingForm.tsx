@@ -45,7 +45,7 @@ function ShippingForm() {
     try {
       const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
       const response = await axios.post(
-        "http://localhost:3000/api/stripe/create-checkout-session",
+        `${import.meta.env.VITE_SERVER_URL}/api/stripe/create-checkout-session`,
         {
           shoppingCartProduct: shoppingCartProduct,
           shippingInfo: data,

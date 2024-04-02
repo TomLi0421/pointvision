@@ -30,7 +30,7 @@ function LoginForm() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/login",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/login`,
         {
           user: data,
         }

@@ -30,7 +30,7 @@ export default function OrderProvider({ children }: any) {
   const handleSearch = async (orderId: string) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/search/order",
+        `${import.meta.env.VITE_SERVER_URL}/api/search/order`,
         {
           params: {
             orderId: orderId,

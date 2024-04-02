@@ -19,7 +19,7 @@ export default function Subscription() {
       setErrorMessage("");
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/mailchimp/subscribe",
+          `${import.meta.env.VITE_SERVER_URL}/api/mailchimp/subscribe`,
           {
             email: inputRef.current!.value,
           }

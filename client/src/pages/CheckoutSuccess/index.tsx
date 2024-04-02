@@ -52,7 +52,7 @@ function CheckoutSuccessPage() {
   const isCheckoutSuccess = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/stripe/order/success",
+        `${import.meta.env.VITE_SERVER_URL}/api/stripe/order/success`,
         {
           params: {
             session_id: checkoutSession.get("session_id"),
@@ -85,7 +85,7 @@ function CheckoutSuccessPage() {
     try {
       if (shippingInfo) {
         const response = await axios.get(
-          "http://localhost:3000/api/search/order",
+          `${import.meta.env.VITE_SERVER_URL}/api/search/order`,
           {
             params: {
               orderId: shippingInfo.id,

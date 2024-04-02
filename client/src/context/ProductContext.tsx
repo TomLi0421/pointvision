@@ -58,7 +58,7 @@ export default function ProductProvider({ children }: ProductProviderProps) {
   const getProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/get-products/get-all-products"
+        `${import.meta.env.VITE_SERVER_URL}/api/get-products/get-all-products`
       );
 
       if (response.status === 200) {
@@ -82,7 +82,7 @@ export default function ProductProvider({ children }: ProductProviderProps) {
   const getProductByName = async (productName: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/get-products/${productName}`
+        `${import.meta.env.VITE_SERVER_URL}/api/get-products/${productName}`
       );
 
       if (response.status === 200) {

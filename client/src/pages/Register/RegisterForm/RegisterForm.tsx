@@ -30,7 +30,7 @@ function RegisterForm() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/register",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/register`,
         {
           newUser: data,
         }

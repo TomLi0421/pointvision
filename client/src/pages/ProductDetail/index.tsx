@@ -6,7 +6,6 @@ import { useContext, useEffect } from "react";
 import ProductDescription from "../../components/ProductDesciption/ProductDescription";
 import CustomAccordion from "../../components/ui/CustomAccordion";
 import { ProductContext } from "../../context/ProductContext";
-import Divider from "@mui/material/Divider";
 
 function ProductDetailPage() {
   const { productName } = useParams<{ productName: string }>();

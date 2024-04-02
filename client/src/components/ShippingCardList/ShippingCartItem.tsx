@@ -12,7 +12,7 @@ function ShippingCartItem(props: any) {
 
   const getProduct = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/get-products/${props.productName}`
+      `${import.meta.env.VITE_SERVER_URL}/api/get-products/${props.productName}`
     );
 
     setProduct(response.data);

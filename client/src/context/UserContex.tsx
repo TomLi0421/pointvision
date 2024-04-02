@@ -46,7 +46,7 @@ export default function UserProvider({ children }: any) {
       const token = cookies.get("token");
 
       const response = await axios.get(
-        "http://localhost:3000/api/user/get-personal-data",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/get-personal-data`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function UserProvider({ children }: any) {
       const token = cookies.get("token");
 
       const response = await axios.get(
-        "http://localhost:3000/api/user/purchase-history",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/purchase-history`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
