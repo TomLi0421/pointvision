@@ -1,11 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import { ProductContext } from "../../context/ProductContext";
 import styles from "./ProductCardList.module.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 function ProductCardList(props: any) {
-  let { products, isDataLoaded } = useContext(ProductContext);
+  let { products, isDataLoaded, getProducts } = useContext(ProductContext);
   const [sortMethod, setSortMethod] = useState("low");
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   if (props.type) {
     products = products.filter((product: any) => {
@@ -55,7 +61,11 @@ function ProductCardList(props: any) {
             );
           })
         ) : (
-          <p>Loading ...</p>
+          <div className="col-span-3">
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
+          </div>
         )}
       </div>
     </>

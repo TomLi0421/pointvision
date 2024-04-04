@@ -33,6 +33,7 @@ export const ProductContext = createContext({
     color: "",
   },
   isDataLoaded: false,
+  getProducts: () => {},
   getProductByName: (productName: string) => {},
 });
 
@@ -50,10 +51,6 @@ export default function ProductProvider({ children }: ProductProviderProps) {
     weight: "",
     color: "",
   });
-
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   const getProducts = async () => {
     try {
@@ -109,6 +106,7 @@ export default function ProductProvider({ children }: ProductProviderProps) {
         products: products,
         product: product,
         isDataLoaded: isDataLoaded,
+        getProducts: getProducts,
         getProductByName: getProductByName,
       }}
     >
