@@ -8,17 +8,6 @@ router.post(
   express.raw({ type: "application/json" }),
   async (request, response) => {
     let event = request.body;
-    // This is your Stripe CLI webhook secret for testing your endpoint locally.
-    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET.toString();
-
-    const sig = request.headers["stripe-signature"];
-
-    try {
-      event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-    } catch (err) {
-      response.status(400).send(`Webhook Error: ${err.message}`);
-      return;
-    }
 
     // Handle the event
     switch (event.type) {
