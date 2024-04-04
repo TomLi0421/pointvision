@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Transaction = require("../models/transaction");
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 router.get("/", async (req, res) => {
   const { orderId } = req.query;
 

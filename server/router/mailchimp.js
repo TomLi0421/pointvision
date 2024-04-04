@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
   server: "us18",

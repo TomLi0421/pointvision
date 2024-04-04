@@ -3,7 +3,11 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 router.post("/", async (req, res) => {
+  console.log("register router");
   try {
     const { newUser } = req.body;
 

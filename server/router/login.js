@@ -4,6 +4,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 router.post("/", async (req, res) => {
   const { user } = req.body;
 

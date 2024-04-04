@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/product");
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 router.get("/get-all-products", async (req, res) => {
   // mongoose query
   // const products = [
