@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, useEffect } from "react";
+import { ReactNode, createContext, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,6 +34,7 @@ export const ProductContext = createContext({
   },
   isDataLoaded: false,
   getProducts: () => {},
+  // @ts-ignore
   getProductByName: (productName: string) => {},
 });
 

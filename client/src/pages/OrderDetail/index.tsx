@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { OrderContext } from "../../context/OrderContext";
 import OrderTracker from "../../components/OrderTracker/OrderTracker";
 
@@ -13,6 +12,7 @@ function OrderDetailPage() {
   const { orderId } = useParams();
   const navigate = useNavigate();
 
+  // @ts-ignore
   const { order, handleSearch } = useContext(OrderContext);
 
   useEffect(() => {

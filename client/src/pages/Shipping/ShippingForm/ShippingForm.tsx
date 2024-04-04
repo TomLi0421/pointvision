@@ -31,6 +31,7 @@ function ShippingForm() {
   } = useForm<Inputs>();
 
   const { shoppingCartProduct } = useContext(ShoppingCartContext);
+  // @ts-ignore
   const { userData, handleUserData } = useContext(UserContext);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ function ShippingForm() {
       );
 
       const session = await response.data;
-      const result = await stripe!.redirectToCheckout({
+      await stripe!.redirectToCheckout({
         sessionId: session.id,
       });
     } catch (error: any) {}
