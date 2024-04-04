@@ -127,8 +127,6 @@ router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (request, response) => {
-    let event = request.body;
-
     // Handle the event
     switch (event.type) {
       case "payment_intent.succeeded":
