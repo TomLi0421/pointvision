@@ -7,6 +7,7 @@ interface ShoppingCartProviderProps {
 export const ShoppingCartContext = createContext({
   shoppingCartQty: 0,
   shoppingCartProduct: [],
+  // @ts-ignore
   handleUpdateShoppingCart: (product: {
     name: string;
     imgName: string;
@@ -15,7 +16,9 @@ export const ShoppingCartContext = createContext({
     qty: number;
     price: number;
   }) => {},
+  // @ts-ignore
   removeProduct: (product: { name: string; qty: number }) => {},
+  // @ts-ignore
   storeProductQty: (productName: String, action: String) => {},
   totalPrice: 0,
   calculateTotalPrice: () => {},
@@ -154,6 +157,7 @@ export default function ShoppingCartProvider({
 
   // on shopping cart page, calculate the total price of all products in the shopping cart
   const calculateTotalPrice = () => {
+    // @ts-ignore
     setTotalPrice((prev: any) => {
       const total = shoppingCartProduct.reduce(
         (acc: any, product: any) => {

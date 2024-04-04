@@ -10,6 +10,7 @@ const stripeRouter = require("./router/stripe");
 const searchOrderRouter = require("./router/searchOrder");
 const userDataRouter = require("./router/userData");
 const mailchimpRouter = require("./router/mailchimp");
+const webhookRouter = require("./router/webhook");
 const auth = require("./auth");
 
 // aws service only
@@ -32,13 +33,15 @@ const auth = require("./auth");
 
 // express app
 const app = express();
-app.use(express.json());
+
 // middleware allows localhost:5173 to access the server
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://checkout.stripe.com"],
   })
 );
+
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // connect to mongodb
@@ -57,6 +60,7 @@ app.use("/api/get-products", getProductsRouter);
 app.use("/api/user/login", loginRouter);
 app.use("/api/user/register", registerRouter);
 app.use("/api/stripe", stripeRouter);
+app.use("/api", webhookRouter);
 app.use("/api/search/order", searchOrderRouter);
 app.use("/api/user", auth, userDataRouter);
 app.use("/api/mailchimp", mailchimpRouter);

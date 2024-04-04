@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FormEvent, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,6 +20,7 @@ interface OrderContextType {
 export const OrderContext = createContext<OrderContextType>({
   order: null,
   isOrderFound: false,
+  // @ts-ignore
   handleSearch: (orderId: string) => {},
 });
 

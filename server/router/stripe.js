@@ -2,7 +2,9 @@ const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const router = express.Router();
 const orderCode = require("../utils/generateOrderCode");
-const Transaction = require("../models/transaction");
+
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
 router.get("/order/success", async (req, res) => {
   try {
@@ -127,6 +129,8 @@ router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (request, response) => {
+    let event = request.body;
+
     // Handle the event
     switch (event.type) {
       case "payment_intent.succeeded":
