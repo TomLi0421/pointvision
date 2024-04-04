@@ -2,6 +2,7 @@ const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const router = express.Router();
 const orderCode = require("../utils/generateOrderCode");
+const Transaction = require("../models/transaction");
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));

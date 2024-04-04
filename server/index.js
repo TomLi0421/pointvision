@@ -10,7 +10,6 @@ const stripeRouter = require("./router/stripe");
 const searchOrderRouter = require("./router/searchOrder");
 const userDataRouter = require("./router/userData");
 const mailchimpRouter = require("./router/mailchimp");
-const webhookRouter = require("./router/webhook");
 const auth = require("./auth");
 
 // aws service only
@@ -60,7 +59,6 @@ app.use("/api/get-products", getProductsRouter);
 app.use("/api/user/login", loginRouter);
 app.use("/api/user/register", registerRouter);
 app.use("/api/stripe", stripeRouter);
-app.use("/api", webhookRouter);
 app.use("/api/search/order", searchOrderRouter);
 app.use("/api/user", auth, userDataRouter);
 app.use("/api/mailchimp", mailchimpRouter);
