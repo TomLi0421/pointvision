@@ -1,7 +1,6 @@
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const router = express.Router();
-const orderCode = require("../utils/generateOrderCode");
 const Transaction = require("../models/transaction");
 
 router.use(express.json());
@@ -48,8 +47,11 @@ router.post("/create-checkout-session", async (req, res) => {
     10
   );
 
+  const timestamp = Date.now();
+  const randomNumber = Math.floor(Math.random() * 1000);
+
   const transactionInfo = {
-    id: orderCode,
+    id: `${timestamp}${randomNumber}`,
     email: shippingInfo.email,
     firstName: shippingInfo.firstName,
     lastName: shippingInfo.lastName,
