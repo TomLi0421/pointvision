@@ -8,6 +8,8 @@ interface LoggedinProviderProps {
 
 export const LoggedinContext = createContext({
   isLoggedIn: false,
+
+  // @ts-ignore
   setIsLoggedIn: (value: boolean) => {},
 });
 
