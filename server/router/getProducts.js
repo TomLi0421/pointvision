@@ -6,37 +6,37 @@ router.get("/get-all-products", async (req, res) => {
   // mongoose query
   // const products = [
   //   {
-  //     name: "Kat Walk C 2 Core",
-  //     imgName: ["ket_walk_c_2_core_treadmill.png"],
+  //     name: "TactSuit X40",
+  //     imgName: ["bhaptics_tactsuit_x40_1.png", "bhaptics_tactsuit_x40_2.png"],
   //     description:
-  //       "C2 Core brings VR gamers into an immersive and physically active VR adventure, offering maximum performance of the core functions of KAT VR Treadmills at minimum cost. Embark on an immersive and active VR journey with C2 Core! Experience the full power of KAT VR Treadmill’s core functions without breaking the bank. This is the ultimate affordable solution for VR enthusiasts, delivering precision in locomotion that gamers worldwide have eagerly awaited. Elevate your VR adventures today with C2 Core and step into a new realm of affordable excellence!",
-  //     compatible: "Stream VR, Meta, oculus, PlayStation",
-  //     brand: "KAT VR",
-  //     type: "TreadmillsAndFitness",
-  //     price: "1199.99",
+  //       "Experience gaming like never before with the bHaptics Tactsuit X40, a cutting-edge wireless haptic vest featuring 40 precise haptic feedback points in an ergonomic design. Enhance your VR adventures with seamless cross-platform support and untethered, lag-free gameplay. The adjustable, one-size-fits-all vest includes customizable shoulder and side straps, a detachable and washable mesh lining, and compatibility with leading VR headsets such as Oculus Quest 2, HTC Vive, and Valve Index.",
+  //     compatible: "Meta Quest 3, Pro and 2, Steam VR",
+  //     brand: "bHaptic",
+  //     type: "HapticDevices",
+  //     price: "529",
   //   },
   //   {
-  //     name: "ICAROS Pro",
-  //     imgName: ["icaros_pro.png"],
+  //     name: "TactGlove DK1",
+  //     imgName: ["tactglove_dk1_1.png", "tactglove_dk1_1.png"],
   //     description:
-  //       "ICAROS provides the eco-system for exciting and performance improving exercise experiences. The ICAROS Pro combines fitness with virtual reality and enables users to fly, dive or drive through virtual worlds while improving fitness. Train different muscle groups with a focus on upper body and core while improving reflexes, balance and coordination. Made in Germany from premium materials, the ICAROS Pro devices are highly optimized for professional use and can be installed almost anywhere.",
-  //     compatible: "PICO 4, HTC Vive, Meta quest",
-  //     brand: "ICAROS",
-  //     type: "TreadmillsAndFitness",
-  //     price: "11900",
+  //       "The bHaptics TactGlove DK1 Wireless Haptic Gloves are the perfect VR accessories, allowing you to experience virtual reality with tactile feedback. Make your VR experience more immersive with the DK1 Wireless Haptic Gloves, featuring haptic feedback technology for a realistic feel. Get ready to take your VR experience to the next level.",
+  //     compatible: "Meta Quest 3, Pro and 2",
+  //     brand: "bHaptic",
+  //     type: "HapticDevices",
+  //     price: "299",
   //   },
   //   {
-  //     name: "Omni One",
-  //     imgName: ["omni_one.png"],
+  //     name: "TactVisor",
+  //     imgName: ["tactvisor_1.png", "tactvisor_2.png"],
   //     description:
-  //       "Omni One is the ultimate VR gaming system that provides unmatched immersion and freedom of movement in VR. This all-inclusive package features the Omni One treadmill, VR headset, and access to the Omni One game store.",
-  //     compatible: "Pico Neo 2 Headset",
-  //     brand: "omni one",
-  //     type: "TreadmillsAndFitness",
-  //     price: "2595",
+  //       "TactVisor's water and pollutant-resistant design, with four haptic feedback points, provides its users with an immersive and pleasant gaming experience, delivering accurate sensations ranging from a gentle breeze to the impact of a headshot.",
+  //     compatible:
+  //       "Meta Quest 3, Pro and 2, Native support, Valve Index, Rift S",
+  //     brand: "bHaptic",
+  //     type: "HapticDevices",
+  //     price: "149",
   //   },
   // ];
-
   // Product.insertMany(products)
   //   .then((result) => {
   //     res.send(result);

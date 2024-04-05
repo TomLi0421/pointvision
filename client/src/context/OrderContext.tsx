@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Order {
@@ -30,6 +30,21 @@ export default function OrderProvider({ children }: any) {
 
   const handleSearch = async (orderId: string) => {
     try {
+      if (orderId == "") {
+        setIsOrderFound(false);
+        toast.error("Please enter a valid order ID", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/api/search/order`,
         {
@@ -42,9 +57,8 @@ export default function OrderProvider({ children }: any) {
       if (response.status === 200) {
         setOrder(response.data);
         setIsOrderFound(true);
-      }
-    } catch (error: any) {
-      if (error.response.status === 404) {
+      } else if (response.status === 404) {
+        setIsOrderFound(false);
         toast.error("Order not found", {
           position: "top-right",
           autoClose: 5000,
@@ -55,8 +69,18 @@ export default function OrderProvider({ children }: any) {
           progress: undefined,
           theme: "light",
         });
-        setIsOrderFound(false);
       }
+    } catch (e: any) {
+      toast.error("Order not found", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -69,7 +93,6 @@ export default function OrderProvider({ children }: any) {
       }}
     >
       {children}
-      <ToastContainer />
     </OrderContext.Provider>
   );
 }

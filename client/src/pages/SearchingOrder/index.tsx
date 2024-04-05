@@ -4,6 +4,7 @@ import InputBox from "../../components/ui/InputBox";
 import styles from "./styles.module.css";
 import OrderTracker from "../../components/OrderTracker/OrderTracker";
 import { OrderContext } from "../../context/OrderContext";
+import { ToastContainer } from "react-toastify";
 
 function SearchingOrderPage() {
   const { isOrderFound, handleSearch } = useContext(OrderContext);
@@ -52,6 +53,7 @@ function SearchingOrderPage() {
           <OrderTracker />
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }

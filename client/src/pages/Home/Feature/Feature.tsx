@@ -1,5 +1,10 @@
 import styles from "./Feature.module.css";
 import FeatureCard from "./FeatureCard";
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import SettingsInputHdmiIcon from "@mui/icons-material/SettingsInputHdmi";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+
 export default function Feature() {
   return (
     <div className="py-6 sm:mb-0 lg:max-w-[66rem] lg:mx-auto lg:lg:grid lg:grid-cols-3">
@@ -27,87 +32,37 @@ export default function Feature() {
       <div className="lg:px-6 lg:grid lg:grid-cols-2 lg:col-span-2">
         <FeatureCard
           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-14 h-14 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
+            <SportsEsportsIcon sx={{ width: 36, height: 36, color: "white" }} />
           }
-          title="Easy to use"
+          title="Level Up Your Gameplay"
           description="
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          Our products are packed with innovative features that enhance your VR experience for unmatched immersion and performance."
         />
         <FeatureCard
           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-14 h-14 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
+            <SettingsInputHdmiIcon
+              sx={{ width: 36, height: 36, color: "white" }}
+            />
           }
-          title="Easy to use"
+          title="Effortless Setup"
           description="
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          Simply plug and play to experience VR immersion in minutes"
         />
         <FeatureCard
           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-14 h-14 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
+            <LocalShippingIcon sx={{ width: 36, height: 36, color: "white" }} />
           }
-          title="Easy to use"
+          title="Fast and Reliable Shipping"
           description="
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          We prioritize efficient logistics and secure packaging, so you can begin your virtual reality adventures without delay."
         />
         <FeatureCard
           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-14 h-14 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"
-              />
-            </svg>
+            <CreditCardIcon sx={{ width: 36, height: 36, color: "white" }} />
           }
-          title="Easy to use"
+          title="Simplify Your Shopping Experience"
           description="
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          Our website offers a user-friendly checkout experience for purchasing VR accessories. With just a few clicks."
         />
       </div>
     </div>
