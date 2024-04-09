@@ -71,6 +71,7 @@ export default function OrderProvider({ children }: any) {
         });
       }
     } catch (e: any) {
+      setIsOrderFound(false);
       toast.error("Order not found", {
         position: "top-right",
         autoClose: 5000,
