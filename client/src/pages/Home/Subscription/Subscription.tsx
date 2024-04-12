@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef } from "react";
 import subBackground from "../../../assets/subscription_background.jpg";
 import Button from "../../../components/ui/Button";
 import InputBox from "../../../components/ui/InputBox";
@@ -9,14 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Subscription() {
   const inputRef = useRef<HTMLInputElement>();
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();
 
     if (inputRef.current!.value && inputRef.current!.checkValidity()) {
-      console.log("Subscribed with email: ", inputRef.current!.value);
-      setErrorMessage("");
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_URL}/api/mailchimp/subscribe`,
@@ -37,20 +34,25 @@ export default function Subscription() {
             theme: "light",
           });
         }
+        inputRef.current!.value = "";
       } catch (error) {
-        toast.error("Internal server error", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.error(
+          `${
+            inputRef.current!.value
+          } looks fake or invalid, please enter a real email address.`,
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
+        inputRef.current!.value = "";
       }
-    } else {
-      setErrorMessage("Please enter a valid email address.");
     }
   };
 
@@ -78,11 +80,8 @@ export default function Subscription() {
               className="py-3.5 pl-5 w-80 rounded mb-1 mx-auto xl:mr-1"
               type="email"
               placeholder="Your Email"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
-            {errorMessage && (
-              <p className="text-red-600 font-semibold">{errorMessage}</p>
-            )}
+
             <Button
               className={`${styles.subscription__btn__bg_color} text-white py-3.5 w-80 rounded mb-1 mx-auto`}
               onClick={handleSubscribe}

@@ -16,11 +16,11 @@ router.post("/subscribe", async (req, res) => {
       status: "subscribed",
     });
 
-    if (response.status === 200) {
+    if (response.status === "subscribed") {
       res.status(200).json({ status: "subscribed" });
     }
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json({ error: error.response.body.detail });
   }
 });
 
