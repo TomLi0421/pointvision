@@ -64,11 +64,14 @@ Follow these steps to set up the server:
 
 - TypeScript
 - Tailwind CSS
+- Material UI
 - React
 - Node.js
 - MongoDB
 - Nginx
+- AWS Route 53
 - AWS EC2
-- AWS s3
+- AWS S3
 - AWS CloudFront
 - Stripe API
+- Mailchimp API
