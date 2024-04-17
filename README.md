@@ -17,6 +17,10 @@ Follow these steps to set up the client:
 3. Create a `.env` file in the `client` directory. Add your Stripe public key:
    ```
    VITE_STRIPE_PUBLIC_KEY=<public key>
+   # for local developement
+   VITE_SERVER_URL=http://localhost:3001
+   # for production
+   VITE_SERVER_URL=https://pointvision.site
    ```
 4. Set up a Stripe Webhook. Follow the instructions in the [Stripe documentation](https://docs.stripe.com/webhooks).
 
@@ -36,11 +40,16 @@ Follow these steps to set up the server:
    ```
 2. Create a `.env` file in the `server` directory. Add your database URL, Stripe private key, and client URL:
 
-```
-DATABASE_URL=<url>
-STRIPE_PRIVATE_KEY=<private key>
-CLIENT_URL=<url>
-```
+   ```
+   PORT=3001
+   DATABASE_URL=<url>
+   STRIPE_PRIVATE_KEY=<private key>
+   MAILCHIMP_API_KEY=<url>
+   # for local developement
+   CLIENT_URL=http://localhost:5173
+   # for production
+   CLIENT_URL=https://pointvision.site
+   ```
 
 3. Install all the necessary packages:
    ```
